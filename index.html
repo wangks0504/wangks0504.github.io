@@ -172,7 +172,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="第一天"><a href="#第一天" class="headerlink" title="第一天"></a>第一天</h2><ol>
+        <span id="more"></span>
+<h2 id="第一天"><a href="#第一天" class="headerlink" title="第一天"></a>第一天</h2><ol>
 <li>时间复杂度</li>
 </ol>
 <ul>
@@ -194,9 +195,18 @@
 </li>
 <li><p>冒泡排序</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">buttonSort</span><span class="params">(<span class="type">int</span>[] arr)</span>&#123;</span><br><span class="line">   <span class="keyword">if</span>  ( arr == <span class="literal">null</span> || arr.length&lt;<span class="number">2</span>)&#123;</span><br><span class="line">       <span class="keyword">return</span>;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">for</span>  ( <span class="type">int</span> <span class="variable">s</span> <span class="operator">=</span> arr.length - <span class="number">1</span> ;s  &gt;<span class="number">0</span>;s--)&#123;</span><br><span class="line">       <span class="keyword">for</span> ( <span class="type">int</span> <span class="variable">f</span> <span class="operator">=</span> <span class="number">0</span> ; f &lt; arr.length ;f++)&#123;</span><br><span class="line">           <span class="keyword">if</span> (arr[f] &gt; arr [f+<span class="number">1</span>])&#123;</span><br><span class="line">               swap(arr, f ,f + <span class="number">1</span>);</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line"> &#125;</span><br><span class="line">   <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">swap</span> <span class="params">(<span class="type">int</span>[] arr, <span class="type">int</span> i1 ,<span class="type">int</span> i2)</span>&#123;</span><br><span class="line">       arr[i1] = arr[i1] ^ arr[i2];</span><br><span class="line">       arr[i2] = arr[i1] ^ arr[i2];</span><br><span class="line">       arr[i1] = arr[i1] ^ arr[i2];</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/2024/03/02/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/#more">more >></a>
-        
+</li>
+<li><p>异或运算 (不同为1,相同为0)(无进位相加)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">swap</span><span class="params">(<span class="type">int</span> a,<span class="type">int</span> b)</span>;</span><br><span class="line">a= a^b;</span><br><span class="line">b= a^b;</span><br><span class="line">a =a^b;</span><br><span class="line"><span class="comment">//aba或者bab都可以交换两个数的值</span></span><br><span class="line"><span class="comment">//只有a,b两个值的存储位置不同才可以这么计算</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>例题<br>一个数组中有的数存在奇数次有的数存在偶数次怎么快速找出存在次数为奇数的数(注:奇数仅有一个)  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">printOddTimesNums</span><span class="params">(<span class="type">int</span>[] arr)</span>&#123;</span><br><span class="line"><span class="type">int</span> <span class="variable">eor</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span> ; i&lt; arr.length;i++)&#123;</span><br><span class="line">    eor ^= arr[i];</span><br><span class="line">&#125;</span><br><span class="line">System.out.println(<span class="string">&quot;eor&quot;</span>);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+  (注:奇数有两个的解决方法)  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">printOddTimesNums</span><span class="params">(<span class="type">int</span>[] arr)</span>&#123;</span><br><span class="line">  <span class="type">int</span> <span class="variable">eor</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span> ; i&lt; arr.length;i++)&#123;</span><br><span class="line">      eor ^= arr[i];</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//eor = a^b</span></span><br><span class="line">  <span class="comment">// eor !=0</span></span><br><span class="line">  <span class="type">int</span> <span class="variable">a</span> <span class="operator">=</span> eor &amp; (~eor +<span class="number">1</span>);</span><br><span class="line">  <span class="comment">//取eor最👉边为1赋值给a</span></span><br><span class="line">  <span class="type">int</span> <span class="variable">onlyOne</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> cur : arr)&#123;</span><br><span class="line">      <span class="keyword">if</span> ((a &amp; cur) != <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="comment">//注意这里不可以(a&amp;cur) == 1 因为==1只有在最后一位都为一才会等于1这里面可能不是在最后一位上等于1 可能在其他位上同时等于1 但是 == 0 是可以的</span></span><br><span class="line">          onlyOne ^= cur ;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  System.out.println(onlyOne +<span class="string">&quot;第二个数是&quot;</span> +(eor^onlyOne));</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line"><span class="type">test</span> <span class="variable">sum</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">test</span>();</span><br><span class="line"> <span class="type">int</span>[] arr = &#123;<span class="number">2</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">5</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">7</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">8</span>&#125;;</span><br><span class="line"> sum.printOddTimesNums(arr);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//输出结果为</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+
       
 
       
@@ -258,7 +268,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h4 id="第一天"><a href="#第一天" class="headerlink" title="第一天"></a>第一天</h4><ol>
+        <span id="more"></span>
+<h4 id="第一天"><a href="#第一天" class="headerlink" title="第一天"></a>第一天</h4><ol>
 <li>容器  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> Arraylist&lt;String&gt; notes  = <span class="keyword">new</span> <span class="title class_">Arraylist</span>&lt;String&gt;();</span><br><span class="line"><span class="comment">// &lt;&gt;充当of的作用创建的是一个基于String的容器其可以储存用户传入的数据</span></span><br></pre></td></tr></table></figure></li>
 <li>调用父类中的函数或者变量<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">super</span>.变量();</span><br></pre></td></tr></table></figure>
 <ul>
@@ -266,9 +277,19 @@
 </ul>
 </li>
 </ol>
-        
-          <a class="article-more-a" href="/2024/03/01/java%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%A8%8B/#more">more >></a>
-        
+<h3 id="第二天"><a href="#第二天" class="headerlink" title="第二天"></a>第二天</h3><p><strong>多态变量</strong></p>
+<ol>
+<li><img src="/image.png" alt="alt text"><ul>
+<li>可以通过父类定义子类的对象</li>
+</ul>
+</li>
+<li><pre><code class="java"> //关于函数的定义问题
+ //谁可见 + 什么类型+ 名称 
+ // public String hello ()&#123;
+</code></pre>
+</li>
+</ol>
+
       
 
       
@@ -330,35 +351,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="数据库学习路程"><a href="#数据库学习路程" class="headerlink" title="数据库学习路程"></a>数据库学习路程</h3><p><em>第一天</em><br>** DDL**</p>
-<hr>
-<ol>
-<li>查询所有数据库  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show databases </span><br></pre></td></tr></table></figure>
-<hr>
-</li>
-<li>查询当前数据库  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select database()</span><br></pre></td></tr></table></figure>
-<hr>
-</li>
-<li>创建<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create database [if not exist] 数据库名称 [default charset 字符集] [collate 排序规则] </span><br></pre></td></tr></table></figure>
-<hr>
-</li>
-<li>删除<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dpop database [if exists] 数据库名</span><br></pre></td></tr></table></figure>
-<hr>
-</li>
-<li>使用数据库 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">use</span><br></pre></td></tr></table></figure>
-<hr>
-</li>
-<li>查询当前数据库所有表结构<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show tables</span><br></pre></td></tr></table></figure>
-<hr>
-</li>
-<li>查询表结构<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">desc 表名</span><br></pre></td></tr></table></figure>
-<hr>
-</li>
-<li>查询指定表的建表语句<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show create table 表名</span><br></pre></td></tr></table></figure>
-<hr>
-</li>
-<li>DDL 表创建 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">create table tb_name(  </span><br><span class="line">-&gt; id int comment &#x27;binahao&#x27;,  </span><br><span class="line">-&gt; name varchar(50) comment   &#x27;mingzi&#x27;,  </span><br><span class="line">-&gt; age int comment &#x27;nianling&#x27;,  </span><br><span class="line">-&gt; gender varchar(1) comment    &#x27;xingbie&#x27;  </span><br><span class="line">-&gt; ) comment &#x27;yonghubiao&#x27;;  </span><br></pre></td></tr></table></figure></li>
-</ol>
+        <h3 id="数据库学习路程"><a href="#数据库学习路程" class="headerlink" title="数据库学习路程"></a>数据库学习路程</h3>
         
           <a class="article-more-a" href="/2024/02/29/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%A8%8B/#more">more >></a>
         
@@ -423,10 +416,10 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>1.-h, –help: 显示命令的帮助信息。<br>2.-v, –version: 显示命令的版本信息。<br>3.-r, –recursive: 递归地操作目录及其内容。<br>4.-f, –force: 强制执行操作，通常用于覆盖已有文件或目录。<br>
-        
-          <a class="article-more-a" href="/2024/02/15/%E5%85%B3%E4%BA%8Elinux-ubuntu-%E7%9A%84-%E5%91%BD%E4%BB%A4%E5%B8%B8%E7%94%A8%E9%9B%86%E9%94%A6/#more">more >></a>
-        
+         <span id="more"></span>
+<p>1.-h, –help: 显示命令的帮助信息。<br>2.-v, –version: 显示命令的版本信息。<br>3.-r, –recursive: 递归地操作目录及其内容。<br>4.-f, –force: 强制执行操作，通常用于覆盖已有文件或目录。  </p>
+<p>5.-i, –interactive: 交互式执行操作，通常需要用户确认。<br>6.-y: 在命令中使用时，表示自动应答 “yes”，即不需要用户手动确认。<br>7.-l, –list: 列出信息，例如列出目录中的文件列表。<br>8.-a, –all: 显示所有的信息，包括隐藏文件或目录。<br>9.-p, –parents: 创建目录时自动创建父目录（如果父目录不存在）。<br>10.-u, –update: 仅更新已存在的文件，不覆盖新文件。<br>11.-c, –compare: 比较两个文件的内容。<br>12.-n, –lines: 指定显示文件的行数。<br>13.-q, –quiet: 静默模式，减少输出信息。<br>14.-o, –output: 指定输出文件名或路径。<br>15.-e, –execute: 执行指定的命令或脚本。</p>
+
       
 
       
