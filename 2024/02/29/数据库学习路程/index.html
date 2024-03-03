@@ -16,7 +16,7 @@
 <meta property="og:description" content="数据库学习路程第一天** DDL**   查询所有数据库  1show databases    查询当前数据库  1select database()   创建1create database [if not exist] 数据库名称 [default charset 字符集] [collate 排序规则]    删除1dpop database [if exists] 数据库名   使用数据库">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-02-29T03:04:48.000Z">
-<meta property="article:modified_time" content="2024-03-02T17:40:39.207Z">
+<meta property="article:modified_time" content="2024-03-03T05:10:55.861Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -201,11 +201,12 @@
 <li>查询指定表的建表语句<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show create table 表名</span><br></pre></td></tr></table></figure>
 <hr>
 </li>
-<li>DDL 表创建 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">create table tb_name(  </span><br><span class="line">-&gt; id int comment &#x27;binahao&#x27;,  </span><br><span class="line">-&gt; name varchar(50) comment   &#x27;mingzi&#x27;,  </span><br><span class="line">-&gt; age int comment &#x27;nianling&#x27;,  </span><br><span class="line">-&gt; gender varchar(1) comment    &#x27;xingbie&#x27;  </span><br><span class="line">-&gt; ) comment &#x27;yonghubiao&#x27;;  </span><br></pre></td></tr></table></figure>
-<pre><code>  &lt;!-- more --&gt;
-</code></pre>
-</li>
+<li>DDL 表创建 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">create table tb_name(  </span><br><span class="line">-&gt; id int comment &#x27;binahao&#x27;,  </span><br><span class="line">-&gt; name varchar(50) comment   &#x27;mingzi&#x27;,  </span><br><span class="line">-&gt; age int comment &#x27;nianling&#x27;,  </span><br><span class="line">-&gt; gender varchar(1) comment    &#x27;xingbie&#x27;  </span><br><span class="line">-&gt; ) comment &#x27;yonghubiao&#x27;;  </span><br></pre></td></tr></table></figure></li>
 </ol>
+<span id="more"></span>
+
+
+
 <h2 id="第二天"><a href="#第二天" class="headerlink" title="第二天"></a>第二天</h2><p><strong>DDL</strong></p>
 <ol>
 <li>添加字段  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter table 表名 add 类型(长度)[comment 注释] [约束]</span><br></pre></td></tr></table></figure>
