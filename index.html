@@ -185,6 +185,16 @@
  5.index 文件：是一个二进制文件，存储了当前工作目录中文件的索引，用于准备下一次提交。
 </code></pre>
 </li>
+<li><p>git数据的跨平台迁移工作及常用命令</p>
+</li>
+</ol>
+<h2 id="数据迁移-假设你已经安装了git"><a href="#数据迁移-假设你已经安装了git" class="headerlink" title="数据迁移(假设你已经安装了git)"></a>数据迁移(假设你已经安装了git)</h2><ol>
+<li>初始化git   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br><span class="line"></span><br><span class="line"><span class="comment">//此过程的目的是在需要上传的文件夹中创建一个.git文件 此文件中存储了版本信息并且以一种特殊的方式联系了文件夹中的文件</span></span><br></pre></td></tr></table></figure></li>
+<li>添加git文件<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br></pre></td></tr></table></figure></li>
+<li>提交到本地仓库目的是记录文件变化(git软件的基本作用) <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m <span class="string">&quot;Initial commit&quot;</span></span><br></pre></td></tr></table></figure></li>
+<li>添加远程仓库(你要推送的远程服务器地址)<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin ssh:<span class="comment">//your_server_ip/home/git/blog.git  </span></span><br><span class="line"></span><br><span class="line"><span class="comment">//your_server_ip = &quot;你服务器的公网ip(注意公网ip与私网ip又区别)</span></span><br><span class="line"><span class="comment">///home/git/blog.git = &quot;应该替换为你云服务器的blog仓库地址</span></span><br></pre></td></tr></table></figure></li>
+<li>推送到远程仓库<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">git push -u origin master</span><br><span class="line"><span class="comment">// -u 的意思是 将本地分支和云服务分支联系起来</span></span><br><span class="line"><span class="comment">//origin 仓库的初始名称</span></span><br><span class="line"><span class="comment">//master 本地分支的名称</span></span><br><span class="line"><span class="comment">// 注意:这两个名称仅仅是git的一种默认用法并不会改变本地目录</span></span><br><span class="line"></span><br><span class="line">git remort -v </span><br><span class="line"><span class="comment">//可以查看当前配置的远程仓库</span></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li></li>
 </ol>
 
       
