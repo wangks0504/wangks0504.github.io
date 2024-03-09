@@ -172,28 +172,10 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h6 id="2024-03-05-20-06-07"><a href="#2024-03-05-20-06-07" class="headerlink" title="2024-03-05 20:06:07"></a>2024-03-05 20:06:07</h6><ol>
-<li><p>2024 3 5 20:06<br>  -具体来说，Git 通过以下方式管理文件和版本历史：  </p>
-<p>1.objects 文件夹：这里包含了所有的数据对象，每个对象对应于文件的一个版本。这些数据对象可以是 blob（文件内容）、tree（文件结构）或 commit 对象。  </p>
-<p>2.refs 文件夹：存储指向数据对象（通常是 commit 对象）的引用，比如分支和标签。  </p>
-<p>3.HEAD 文件：指向当前检出的分支，也就是你正在其上工作的分支。  </p>
-<ol start="4">
-<li>\config 文件：包含仓库的配置信息。</li>
-</ol>
-<p>5.index 文件：是一个二进制文件，存储了当前工作目录中文件的索引，用于准备下一次提交。</p>
-</li>
-</ol>
-<h2 id="git数据的跨平台迁移工作及常用命令"><a href="#git数据的跨平台迁移工作及常用命令" class="headerlink" title="git数据的跨平台迁移工作及常用命令"></a>git数据的跨平台迁移工作及常用命令</h2><pre><code>                 * 数据迁移(假设你已经安装了git) *
-</code></pre>
-<ol>
-<li>初始化git   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br><span class="line"></span><br><span class="line"><span class="comment">//此过程的目的是在需要上传的文件夹中创建一个.git文件 此文件中存储了版本信息并且以一种特殊的方式联系了文件夹中的文件</span></span><br></pre></td></tr></table></figure></li>
-<li>添加git文件<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br></pre></td></tr></table></figure></li>
-<li>提交到本地仓库目的是记录文件变化(git软件的基本作用) <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m <span class="string">&quot;Initial commit&quot;</span></span><br></pre></td></tr></table></figure></li>
-<li>添加远程仓库(你要推送的远程服务器地址)<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin ssh:<span class="comment">//your_server_ip/home/git/blog.git  </span></span><br><span class="line"></span><br><span class="line"><span class="comment">//your_server_ip = &quot;你服务器的公网ip(注意公网ip与私网ip又区别)</span></span><br><span class="line"><span class="comment">///home/git/blog.git = &quot;应该替换为你云服务器的blog仓库地址</span></span><br></pre></td></tr></table></figure></li>
-<li>推送到远程仓库<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">git push -u origin master</span><br><span class="line"><span class="comment">// -u 的意思是 将本地分支和云服务分支联系起来</span></span><br><span class="line"><span class="comment">//origin 仓库的初始名称</span></span><br><span class="line"><span class="comment">//master 本地分支的名称</span></span><br><span class="line"><span class="comment">// 注意:这两个名称仅仅是git的一种默认用法并不会改变本地目录</span></span><br><span class="line"></span><br><span class="line">git remort -v </span><br><span class="line"><span class="comment">//可以查看当前配置的远程仓库</span></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
-<li></li>
-</ol>
-
+        <h6 id="2024-03-05-20-06-07"><a href="#2024-03-05-20-06-07" class="headerlink" title="2024-03-05 20:06:07"></a>2024-03-05 20:06:07</h6>
+        
+          <a class="article-more-a" href="/2024/03/05/git%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/#more">more >></a>
+        
       
 
       
