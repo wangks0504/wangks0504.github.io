@@ -16,7 +16,7 @@
 <meta property="og:description" content="2024-03-05 20:06:07">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-03-05T12:06:07.000Z">
-<meta property="article:modified_time" content="2024-03-09T16:11:45.400Z">
+<meta property="article:modified_time" content="2024-03-12T17:43:52.926Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -190,13 +190,48 @@
 <h2 id="git数据的跨平台迁移工作及常用命令"><a href="#git数据的跨平台迁移工作及常用命令" class="headerlink" title="git数据的跨平台迁移工作及常用命令"></a>git数据的跨平台迁移工作及常用命令</h2><pre><code>                 * 数据迁移(假设你已经安装了git) *
 </code></pre>
 <ol>
-<li>初始化git   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br><span class="line"></span><br><span class="line"><span class="comment">//此过程的目的是在需要上传的文件夹中创建一个.git文件 此文件中存储了版本信息并且以一种特殊的方式联系了文件夹中的文件</span></span><br></pre></td></tr></table></figure></li>
-<li>添加git文件<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br></pre></td></tr></table></figure></li>
-<li>提交到本地仓库目的是记录文件变化(git软件的基本作用) <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m <span class="string">&quot;Initial commit&quot;</span></span><br></pre></td></tr></table></figure></li>
-<li>添加远程仓库(你要推送的远程服务器地址)<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin ssh:<span class="comment">//your_server_ip/home/git/blog.git  </span></span><br><span class="line"></span><br><span class="line"><span class="comment">//your_server_ip = &quot;你服务器的公网ip(注意公网ip与私网ip又区别)</span></span><br><span class="line"><span class="comment">///home/git/blog.git = &quot;应该替换为你云服务器的blog仓库地址</span></span><br></pre></td></tr></table></figure></li>
-<li>推送到远程仓库<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">git push -u origin master</span><br><span class="line"><span class="comment">// -u 的意思是 将本地分支和云服务分支联系起来</span></span><br><span class="line"><span class="comment">//origin 仓库的初始名称</span></span><br><span class="line"><span class="comment">//master 本地分支的名称</span></span><br><span class="line"><span class="comment">// 注意:这两个名称仅仅是git的一种默认用法并不会改变本地目录</span></span><br><span class="line"></span><br><span class="line">git remort -v </span><br><span class="line"><span class="comment">//可以查看当前配置的远程仓库</span></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
-<li></li>
+<li><p>常用命令备忘录 </p>
+<ol>
+<li><p>配置ssh密钥</p>
+   <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>初始化git</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br><span class="line"></span><br><span class="line"><span class="comment">//此过程的目的是在需要上传的文件夹中创建一个.git文件 此文件中存储了版本信息并且以一种特殊的方式联系了文件夹中的文件</span></span><br></pre></td></tr></table></figure></li>
+<li><p>添加git文件  </p>
+   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br></pre></td></tr></table></figure></li>
+<li><p>提交到本地仓库目的是记录文件变化(git软件的基本作用)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m <span class="string">&quot;Initial commit&quot;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>添加远程仓库(你要推送的远程服务器地址)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin ssh:<span class="comment">//your_server_ip/home/git/blog.git  </span></span><br><span class="line">git remote add 自定义名称 ssh地址  </span><br><span class="line">--set-upstream <span class="comment">//设置固定连接</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//your_server_ip = &quot;你服务器的公网ip(注意公网ip与私网ip又区别)</span></span><br><span class="line"><span class="comment">///home/git/blog.git = &quot;应该替换为你云服务器的blog仓库地址</span></span><br></pre></td></tr></table></figure></li>
+<li><p>推送到远程仓库</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">git push -u origin master</span><br><span class="line"><span class="comment">// -u 的意思是 将本地分支和云服务分支联系起来</span></span><br><span class="line"><span class="comment">//origin 仓库的初始名称</span></span><br><span class="line"><span class="comment">//master 本地分支的名称</span></span><br><span class="line"><span class="comment">// 注意:这两个名称仅仅是git的一种默认用法并不会改变本地目录</span></span><br><span class="line"></span><br><span class="line">git remort -v </span><br><span class="line"><span class="comment">//可以查看当前配置的远程仓库</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>克隆远端仓库</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">   git clone git@github.com:用户名/仓库地址</span><br><span class="line">6. 关于如何优雅的查看log</span><br></pre></td></tr></table></figure>
+<p>git log –pretty&#x3D;oneline –abbrev-commit –all –graph</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">7. 如何回退到以前的版本</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>   git reset –hard &#x2F;&#x2F;后面加上回退的版本号</p>
+   <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">2. 分支</span><br><span class="line">  - 查看分支</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
 </ol>
+</li>
+</ol>
+<p>  git branch<br>  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 创建分支</span><br><span class="line"></span><br></pre></td></tr></table></figure><br>  git branch 分支名<br>  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 转换分支</span><br><span class="line"></span><br></pre></td></tr></table></figure><br>  git checkout 分支名<br>  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 合并分支</span><br><span class="line"></span><br></pre></td></tr></table></figure><br>  git merge 分支名</p>
+<pre><code>
+- 
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+</code></pre>
 
       
 
@@ -379,7 +414,7 @@
     		&copy; 2024 John Doe
     	</div>
       	<div class="footer-right">
-      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      		<a href="https://beian.miit.gov.cn" target="_blank">黑ICP备2024019072号</a>   <a href="http://zhiran.xyz" target="_blank">2024-2024 zhiran.xyz</a> 
       	</div>
     </div>
   </div>
