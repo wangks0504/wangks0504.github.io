@@ -16,7 +16,7 @@
 <meta property="og:description" content="2024-03-15 20:16:26">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-03-15T12:16:26.000Z">
-<meta property="article:modified_time" content="2024-03-15T16:09:20.439Z">
+<meta property="article:modified_time" content="2024-03-15T16:59:27.387Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -180,19 +180,24 @@
 <li>基本语法<ul>
 <li>段落元素<br>  <code>&lt;p&gt; 内容 &lt;/p&gt;</code></li>
 <li>标题元素<br>  <code>&lt;h1&gt; &lt;/h1&gt;</code></li>
-<li>属性添加<br>  <code>&lt;p id = &quot;pq&quot;&gt;</code> <code>&lt;p id = &quot;&quot; title =&quot;title1&quot;&gt;</code></li>
-<li>元素内嵌(加粗作用)<br>  <code>&lt;p&gt; &lt;b&gt; hello &lt;b&gt; &lt;/p&gt;</code> <code>单词 加粗的 bold</code></li>
+<li>属性添加<br>  <code>&lt;p id = &quot;pq&quot;&gt;</code><br>  <code>&lt;p id = &quot;&quot; title =&quot;title1&quot;&gt;</code></li>
+<li>元素内嵌(加粗作用)<br>  <code>&lt;p&gt; &lt;b&gt; hello &lt;b&gt; &lt;/p&gt;</code><br>  <code>单词 加粗的 bold</code></li>
 <li>不包含内容(包含属性)<br>  <code>&lt;img src = &quot;title&quot;&gt; || &lt;img src = &quot;title&quot; /&gt;</code> (URL嵌入) <code>&lt;img src = &quot;data:image/jpg;base54,数据&gt;</code></li>
 <li>文档类型声明<br>  <code>&lt;!DOCTYPE html&gt;</code></li>
 <li>确定字符编码<br>  <code>&lt;meta charset=&quot;UTF-8&quot;&gt;</code> </li>
-<li>无序列表<br>  <code>&lt;ul&gt;   &lt;li&gt;列表1&lt;/li&gt;   &lt;li&gt;列表2&lt;/li&gt;   &lt;/ul&gt;</code></li>
-<li>有序列表<br>  <code>&lt;ol&gt; &lt;li&gt;列表&lt;/li&gt; &lt;/ol&gt; </code></li>
+<li>无序列表<br>  <code>&lt;ul&gt;</code><br>  <code>&lt;li&gt;列表1&lt;/li&gt;</code><br>  <code>&lt;li&gt;列表2&lt;/li&gt;</code><br>  <code>&lt;/ul&gt;</code></li>
+<li>有序列表<br>  <code>&lt;ol&gt;</code><br>  <code>&lt;li&gt;列表&lt;/li&gt;</code><br>  <code>&lt;/ol&gt; </code></li>
 <li>Anchor超链接<br>  <code>&lt;a href= &quot;网页地址(或者本地网页地址相对路径即可)(页面内锚点)&quot;&gt; 超链接文本&lt;/a&gt;</code> </li>
 <li>分割线<br>  <code>&lt;hr&gt;</code></li>
 <li>换行<br>  <code>&lt;br&gt;</code></li>
 <li>表单(important)<br> <code>&lt;form action=&quot;https://www.baidu.com/s&quot;&gt;</code><br> <code> &lt;input type = &quot;submit&quot; value =&quot;提交按钮&quot;&gt;</code><br> <code>&lt;/form&gt;</code></li>
 <li>文本框<br> <code>&lt;input type =&quot;text&quot; name=&quot;wd(对应后端服务器函数传入数据的名称)&quot;&gt;</code></li>
-<li>密码框</li>
+<li>密码框<br> <code>&lt;input type= &quot;password&quot; name= &quot;password&quot;&gt;</code></li>
+<li>隐藏框<br> <code>&lt;input type =&quot;hidden&quot; name=&quot;id&quot; &gt;</code></li>
+<li>日期框<br> <code>&lt;input type = &quot;data&quot; name = &quot;birthday&quot;&gt;</code></li>
+<li>单选<br> <code> &lt;input type = &quot;radio&quot; name = &quot;sex&quot; value= &quot;男&quot; checket&gt;</code><br> <code>&lt;input type = &quot;radio&quot; name = &quot;sex&quot; value = &quot;男&quot;&gt;</code></li>
+<li>多选<br> <code>&lt;input type = &quot;checkbox&quot; name =&quot;lalala&quot; value =&quot;唱歌&quot; &gt; </code><br> <code>&lt;input type = &quot;checkbox&quot; name = &quot;lalala&quot; value = &quot;跳舞&quot; &gt;</code><br> <code> &lt;input type =&quot; checkbox&quot; name = &quot;lalala&quot; value =&quot; 打扫卫生&quot;&gt;</code></li>
+<li>文件上传<br> <code> &lt;input type = &quot;file&quot; name = &quot;avatar&quot;&gt;</code></li>
 </ul>
 </li>
 </ol>
