@@ -16,7 +16,7 @@
 <meta property="og:description" content="2024-03-15 20:16:26">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-03-15T12:16:26.000Z">
-<meta property="article:modified_time" content="2024-03-15T16:59:27.387Z">
+<meta property="article:modified_time" content="2024-03-16T16:36:29.508Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -190,7 +190,30 @@
 <li>Anchor超链接<br>  <code>&lt;a href= &quot;网页地址(或者本地网页地址相对路径即可)(页面内锚点)&quot;&gt; 超链接文本&lt;/a&gt;</code> </li>
 <li>分割线<br>  <code>&lt;hr&gt;</code></li>
 <li>换行<br>  <code>&lt;br&gt;</code></li>
-<li>表单(important)<br> <code>&lt;form action=&quot;https://www.baidu.com/s&quot;&gt;</code><br> <code> &lt;input type = &quot;submit&quot; value =&quot;提交按钮&quot;&gt;</code><br> <code>&lt;/form&gt;</code></li>
+<li>表单(important)<br> <code>&lt;form action=&quot;https://www.baidu.com/s&quot; methon=&quot;请求方式&quot; enctype=&quot;数据格式&quot;&gt;</code><br> <code> &lt;input type = &quot;submit&quot; value =&quot;提交按钮&quot;&gt;</code><br> <code>&lt;/form&gt;</code></li>
+<li>http 请求<ul>
+<li>get 请求<br><code>GET /test2?name=li HTTP/1.1</code><br><code>Host: localhost</code></li>
+<li>post 请求<br><code>POST /test2 HTTP/1.1</code><br><code>Host: localhost</code><br><code>Content-Type: application/x-www-form-urlencoded</code><br><code>Content-Length:10</code><br><code>name = id</code>  </li>
+<li>json 请求(必须在输入中添加@RequestBoby 注释)<br><code> POST /test3 HTTP/1.1</code><br><code>Host:localhost</code><br><code> content-Type: application/json</code><br><code>Content-Length: 总长度</code><br><code> &#123;&quot;名称&quot;:&quot;数值&quot;&#125;</code></li>
+<li>multipart 请求示例(可以上传文件)<br><code>POST /test2 HTTP/1.1</code><br><code>Host: localhost</code><br><code>Content-Type: multipart/form-data; boundary=123</code><br><code>Content-Length: 数值</code><br><code>空行</code><br><code>--123</code><br><code> Content-Disposition: form-data; name=&quot;name&quot;</code><br><code>空行</code><br><code>名字</code><br><code>--123</code><br><code>Content-Disposition: form-data; name =&quot;age&quot; </code><br><code>空行</code><br><code>年龄</code><br><code>--123--</code></li>
+</ul>
+</li>
+<li>session 原理 <ul>
+<li>存<br><code>GET /s1?name=zhang HTTP/1.1</code><br><code>Host: localhost</code></li>
+<li>取<br><code>GET /s2 HTTP/1.1 </code><br><code>Host: localhost</code><br><code>Cookie: JSESSIONID=这个ID服务器自动生成</code><ul>
+<li>服务器端代码<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"> <span class="meta">@RequestMapping(&quot;s1&quot;)</span></span><br><span class="line">  <span class="meta">@ResponseBody</span></span><br><span class="line"> <span class="keyword">public</span> String <span class="title function_">s1</span><span class="params">(HttpSession session , String name)</span>&#123;</span><br><span class="line"> session.setAttribute(<span class="string">&quot;name&quot;</span> ,name);</span><br><span class="line"> <span class="keyword">return</span> <span class="string">&quot;数据已经存储&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">@RequestMapping(&quot;s2&quot;)</span></span><br><span class="line"><span class="meta">@ResponseBody</span></span><br><span class="line"> <span class="keyword">public</span> String <span class="title function_">s2</span> <span class="params">(HttpSession session)</span>&#123;</span><br><span class="line"> <span class="keyword">return</span> <span class="string">&quot;name&quot;</span>  + session.getAttribute(<span class="string">&quot;name&quot;</span>);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>jwt 原理 <ul>
+<li>生成token<br><code>GET /j1?name=zhang&amp;pass=123 HTTP/1.1</code><br><code>Host: localhost</code>  </li>
+<li>校验token<br><code>GET /j2 HTTP/1.1</code><br><code>Host: localhost</code><br><code> Authorization:</code><br><code>生成的token码</code><ul>
+<li>服务器代码示例(我好困偷懒一下少了一行)<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">  <span class="meta">@RequestMapping(&quot;j1&quot;)</span></span><br><span class="line"><span class="meta">@ResponseBody</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">j1</span><span class="params">(String name,String pass)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="string">&quot;zhang&quot;</span>.equals(name)&amp;&amp;<span class="string">&quot;123&quot;</span>.equals(pass))&#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">token</span> <span class="operator">=</span> <span class="string">&quot;加生成token的代码&quot;</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;验证身份通过&quot;</span> + token;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;验证身份不通过&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">@RequestMapping(&quot;j2&quot;)</span></span><br><span class="line"><span class="meta">@ResponseBody</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">j2</span><span class="params">(<span class="meta">@RequestHeader</span> String authorization)</span>&#123;</span><br><span class="line">    <span class="keyword">try</span></span><br><span class="line">    &#123;</span><br><span class="line">        System.out.println(authorization);</span><br><span class="line">      <span class="comment">//   &quot;这里的代码看不懂&quot;</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;校验通过你是&quot;</span>+ Jws.getBoby().getSubject();</span><br><span class="line">    &#125; <span class="keyword">catch</span>(Exception e)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;你是啥子&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+</li>
 <li>文本框<br> <code>&lt;input type =&quot;text&quot; name=&quot;wd(对应后端服务器函数传入数据的名称)&quot;&gt;</code></li>
 <li>密码框<br> <code>&lt;input type= &quot;password&quot; name= &quot;password&quot;&gt;</code></li>
 <li>隐藏框<br> <code>&lt;input type =&quot;hidden&quot; name=&quot;id&quot; &gt;</code></li>
@@ -303,6 +326,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2024/03/16/springboot-vue%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%A8%8B/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          springboot+vue学习路程
+        
+      </div>
+    </a>
   
   
     <a href="/2024/03/05/git%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" id="article-nav-older" class="article-nav-link-wrap">
