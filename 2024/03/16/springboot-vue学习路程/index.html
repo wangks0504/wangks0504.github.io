@@ -16,7 +16,7 @@
 <meta property="og:description" content="2024-03-16 21:06:02">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-03-16T13:06:02.000Z">
-<meta property="article:modified_time" content="2024-03-19T16:30:11.276Z">
+<meta property="article:modified_time" content="2024-03-25T15:04:31.768Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -181,6 +181,10 @@
 <li>添加前缀<br> <code> @ConfigurationProperties(prefix=&quot;前缀&quot;)</code>\</li>
 <li>启动类<br> <code> @SpringBootApplication</code></li>
 <li>增大启动类访问范围<br> <code> @ComponentScan(basePackages = &quot;com.包路径&quot;)</code></li>
+<li>用<code>@Bean</code> 单独添加某一个对象 <code>@Import</code><strong>在需要引用外部类对象的类中添加</strong>添加一个类到ioc容器 对第三方包的对象注入到bean容器</li>
+<li><code>@ConditionalOnProperty</code> 想象这样一个情况：你的智能家居系统里有个功能，可以在你说“我回家了”时自动打开灯。这个功能只在你事先选择开启它时才会工作。如果你在系统设置里勾选了“启用回家照明”这个选项，那么当你到家说那句话时，灯就会亮。这就像@ConditionalOnProperty，它检查你是否在配置中“勾选了一个选项”，如果勾选了，就会启用某个功能。</li>
+<li><code>@ConditionalOnMissingBean</code> 当然可以。想象一下你买了一个“智能家居”套装。这个套装里有各种默认设置，比如默认的温度设定是20摄氏度。现在，如果你没做任何改动，它就会自动使用这个默认温度。但如果你决定自己设置温度，比如你想要22摄氏度，那么你的设置就会被使用，而不是默认的20摄氏度。</li>
+<li><code>@ConditionalOnClass</code> 现在想象你的智能家居系统可以连接很多不同品牌的设备，但是有些功能只在某些品牌的设备上才有。比如说，你家里安装了一个智能温控器，但这个功能只有在系统检测到特定品牌的温控器时才会激活。如果系统没有发现这个特定品牌的设备，那么这个功能就不会出现在你的智能家居控制菜单里。@ConditionalOnClass的作用类似：它会检查你的程序是否有用到某些特定的代码库，如果有，就会启用一些相关的功能。</li>
 </ul>
 </li>
 </ol>
