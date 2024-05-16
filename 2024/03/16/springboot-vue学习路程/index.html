@@ -16,7 +16,7 @@
 <meta property="og:description" content="2024-03-16 21:06:02">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-03-16T13:06:02.000Z">
-<meta property="article:modified_time" content="2024-03-25T15:04:31.768Z">
+<meta property="article:modified_time" content="2024-05-15T10:16:07.065Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -185,6 +185,193 @@
 <li><code>@ConditionalOnProperty</code> 想象这样一个情况：你的智能家居系统里有个功能，可以在你说“我回家了”时自动打开灯。这个功能只在你事先选择开启它时才会工作。如果你在系统设置里勾选了“启用回家照明”这个选项，那么当你到家说那句话时，灯就会亮。这就像@ConditionalOnProperty，它检查你是否在配置中“勾选了一个选项”，如果勾选了，就会启用某个功能。</li>
 <li><code>@ConditionalOnMissingBean</code> 当然可以。想象一下你买了一个“智能家居”套装。这个套装里有各种默认设置，比如默认的温度设定是20摄氏度。现在，如果你没做任何改动，它就会自动使用这个默认温度。但如果你决定自己设置温度，比如你想要22摄氏度，那么你的设置就会被使用，而不是默认的20摄氏度。</li>
 <li><code>@ConditionalOnClass</code> 现在想象你的智能家居系统可以连接很多不同品牌的设备，但是有些功能只在某些品牌的设备上才有。比如说，你家里安装了一个智能温控器，但这个功能只有在系统检测到特定品牌的温控器时才会激活。如果系统没有发现这个特定品牌的设备，那么这个功能就不会出现在你的智能家居控制菜单里。@ConditionalOnClass的作用类似：它会检查你的程序是否有用到某些特定的代码库，如果有，就会启用一些相关的功能。</li>
+<li>获取错误信息中的内容 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">StringUtils.hasLength(e.getMessage())</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ol>
+<ul>
+<li><p>命令行修改参数</p>
+<ul>
+<li><code> java -jar *******.jar --server.port=9090</code>用于修改服务端口</li>
+</ul>
+</li>
+<li><p>Spring Boot配置文件的加载顺序大致如下：</p>
+<ul>
+<li>在当前目录下的 &#x2F;config 子目录中的配置文件。</li>
+<li>当前目录中的配置文件。</li>
+<li>在classpath中的 &#x2F;config 包中的配置文件。</li>
+<li>在classpath根下的配置文件。</li>
+</ul>
+</li>
+<li><p>不同开发环境配置</p>
+<ul>
+<li>代码示例<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">  # 通用信息指定生效的环境</span><br><span class="line">  # 如果特定环境和通用环境冲突 则特定环境生效</span><br><span class="line">spring:</span><br><span class="line">  profiles:</span><br><span class="line">      active: dev #选择了dev为开发环境</span><br><span class="line">server:</span><br><span class="line">  servert:</span><br><span class="line">      context--path: /*** # 这里的路径不管选择哪个环境都可以用</span><br><span class="line">   #<span class="comment">&lt;!-- 开发环境 --&gt;</span></span><br><span class="line">spring: </span><br><span class="line">    config:</span><br><span class="line">        activite:</span><br><span class="line">            on-profile: dev</span><br><span class="line">service: </span><br><span class="line">    port: 8081</span><br><span class="line">    </span><br><span class="line">---</span><br><span class="line">   #<span class="comment">&lt;!-- 测试环境 --&gt;</span></span><br><span class="line">spring:</span><br><span class="line">    config:</span><br><span class="line">        activite:</span><br><span class="line">            on-profile: test</span><br><span class="line">service: </span><br><span class="line">    port: 8082</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line">  #<span class="comment">&lt;!-- 生产环境 --&gt;</span></span><br><span class="line">spring:</span><br><span class="line">    config:</span><br><span class="line">        activite:</span><br><span class="line">            on-profile: pro</span><br><span class="line">service: </span><br><span class="line">    port: 8083</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+<ul>
+<li>同一yml文件多分组<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> spring:</span><br><span class="line">     profiles:</span><br><span class="line">        group:</span><br><span class="line">        &quot;dev&quot;: devServer,devDB,devSelf#相关分文件的名字</span><br><span class="line">        #&quot;test&quot;: testServer,testDB,testSelf</span><br><span class="line">        active: dev #选择dev组下的全部文件名</span><br><span class="line">#同一yml文件多分组文件命名示例</span><br><span class="line">#Application.yml#总文件 </span><br><span class="line">#Application-devServer.yml#分文件</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="vue"><a href="#vue" class="headerlink" title="vue"></a>vue</h2><ul>
+<li><p>创建vue项目</p>
+<ol>
+<li><p>安装node.js</p>
+</li>
+<li><p>配置npm全局安装路径 (node的安装目录)</p>
+</li>
+<li><p>可选使用(npnm)<code>npm install -g pnpm</code></p>
+</li>
+<li><p>更换安装包的源<code>npm config set registry http://registry.npm.taobao.org/</code></p>
+</li>
+<li><p>查看源<code>npm config get registry</code></p>
+</li>
+<li><p><code>npm install vue@latest</code></p>
+</li>
+<li><p><code>npm install element-plus --save</code></p>
+</li>
+<li><p><code>npm install axios</code></p>
+</li>
+<li><p><code>npm install sass -D</code></p>
+</li>
+<li><p><code>npm install vue-router</code>安装路由管理</p>
+</li>
+<li><p><code>npm install pinia</code>安装pinia管理库</p>
+</li>
+<li><p><code>npm install pinia-persistedstate-plugin</code>pinia的持久化插件不然浏览器刷新后数据丢失</p>
+</li>
+<li><p><code> npm install @vueup/vue-quill@latest --save</code>安装富文本编辑器</p>
+<ol>
+<li><p>导入组件和样式</p>
+<p><code>import &#123;QuillEditor&#125; from &#39;@vueup/vue-quill&#39;</code></p>
+<p><code>import &#39;@vueup/vue-quill/dist/vue-quill.snow.css&#39;</code></p>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><p>vue常规代码</p>
+<ul>
+<li><p>基础语法</p>
+<ul>
+<li>单位<ul>
+<li><strong><code>em</code></strong>: 相对于当前字体尺寸的单位。例如，1 em 等于当前字体的字体尺寸。</li>
+<li><strong><code>rem</code></strong>: 相对于根元素（html）的字体尺寸的单位。</li>
+<li><strong><code>vh</code></strong> (Viewport Height): 视窗高度的 1%。</li>
+<li><strong><code>vw</code></strong> (Viewport Width): 视窗宽度的 1%。</li>
+<li><strong><code>%</code></strong> : 相对于父元素的百分比单位。</li>
+<li><code>px</code>屏幕像素</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code>&lt;style&gt;</code>下的样式设置语法</p>
+<ul>
+<li><p>颜色</p>
+<ol>
+<li>background-color&#x3D;”transparent” 设置为透明色</li>
+</ol>
+</li>
+<li><p>一些特殊规则</p>
+</li>
+</ul>
+<ol>
+<li>在<strong>template</strong>在此声明template时要在上面加<code>#header</code></li>
+</ol>
+<ul>
+<li><p>位置</p>
+<ol>
+<li><p><strong><code>background-size: cover;</code></strong> 确保背景图片覆盖整个元素，不留空白，也不重复。</p>
+</li>
+<li><p><strong><code>background-position: center;</code></strong> 图片居中显示。</p>
+</li>
+<li><p><strong><code>background-repeat: no-repeat;</code></strong> 防止背景图片在元素中重复。</p>
+</li>
+<li><p><strong><code>background-attachment: fixed;</code></strong> 背景固定，不随页面滚动移动。</p>
+</li>
+<li><p>**<code>margin: 0 auto;</code>**设置自动创建周围空间 0(上下空间为0) auto(自动设置左右空间)</p>
+</li>
+<li><p>盒子模型</p>
+<ol>
+<li><h3 id="content-box（默认盒模型）"><a href="#content-box（默认盒模型）" class="headerlink" title="content-box（默认盒模型）:"></a><code>content-box</code>（默认盒模型）:</h3><p>在 <code>content-box</code> 盒模型中，元素的总宽度和总高度是由内容宽度&#x2F;高度加上内边距、边框和外边距计算出来的。</p>
+</li>
+<li><h3 id="border-box"><a href="#border-box" class="headerlink" title="border-box:"></a><code>border-box</code>:</h3><p>当你把 <code>box-sizing</code> 设置为 <code>border-box</code> 时，元素的宽度和高度则包括了内容、内边距和边框。外边距（margin）不包含在内。</p>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><p>设置边距</p>
+<ul>
+<li><p>内边距</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.avatar-wrapper &#123;</span><br><span class="line">  padding-left: 10px; /* 在头像左侧增加10px内边距 */</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>外边距</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.avatar-wrapper &#123;</span><br><span class="line">  margin-right: 10px; /* 向左推10px */</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<ol>
+<li><p>设置模糊效果</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.header &#123;</span><br><span class="line">  /* 其他样式... */</span><br><span class="line">  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>第一组值 <code>0 4px 6px -1px rgba(0, 0, 0, 0.1)</code> 创建了一个较大而模糊的阴影。<ul>
+<li><code>0</code>  表示阴影在水平方向上没有偏移。</li>
+<li><code>4px</code> 是阴影在垂直方向上的偏移。</li>
+<li><code>6px</code> 是阴影的模糊半径。</li>
+<li><code>-1px</code> 是阴影的扩展半径（负值会使阴影缩小）。</li>
+<li><code>rgba(0, 0, 0, 0.1)</code> 定义了阴影的颜色和透明度。</li>
+</ul>
+</li>
+<li>第二组值 <code>0 2px 4px -1px rgba(0, 0, 0, 0.06)</code> 创建了一个较小且更为细微的阴影，用于增加深度感。</li>
+</ul>
+<p>​</p>
+</li>
+</ol>
+<p>	</p>
+<ul>
+<li>关于元素的移动<ul>
+<li><code>display: flex;</code>  </li>
+<li><code>flex-direction: column;</code>    </li>
+<li><strong>下面这两个都可以修改位置但是我感觉<code>align-items</code>更好用</strong></li>
+<li><code>align-items: flex-start;</code> 调整子项对齐到起始边缘 </li>
+<li><code>justify-content: center; </code> 在垂直方向上居中对齐子元素 </li>
+<li><code> user-select: none;</code></li>
+<li><code>position: relative; </code> 增加定位以便使用偏移 </li>
+<li><code>padding-left: 25%;</code>或者根据实际需求调整，推动所有子元素向右移动</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>配置相应拦截器</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">//定制请求的实例</span><br><span class="line"></span><br><span class="line">//导入axios  npm install axios</span><br><span class="line">import axios from &#x27;axios&#x27;;</span><br><span class="line">//定义一个变量,记录公共的前缀  ,  baseURL</span><br><span class="line">const baseURL = &#x27;/api&#x27;;//配置代理 实现跨域请求</span><br><span class="line">const instance = axios.create(&#123;baseURL&#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//添加响应拦截器</span><br><span class="line">instance.interceptors.response.use(</span><br><span class="line">    result=&gt;&#123;</span><br><span class="line">        return result.data;</span><br><span class="line">    &#125;,</span><br><span class="line">    err=&gt;&#123;</span><br><span class="line">        alert(&#x27;服务异常&#x27;);</span><br><span class="line">        return Promise.reject(err);//异步的状态转化成失败的状态</span><br><span class="line">    &#125;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">export default instance;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>注意事项</p>
+<ol>
+<li><pre><code class="java">   data()&#123;
+       return &#123;
+           url:&#39;https://baidu.com&#39;
+       &#125;
+   &#125;
+</code></pre>
+<p> 这个url后面没有空格不然会导致无法正确连接</p>
+</li>
+<li><p>在<code>&lt;div&gt;</code>中引用函数注意在data中的函数需要把主函数也写上 而跟data同级的函数可以直接调用不用写主函数  如果违反则无法实现功能</p>
+</li>
+<li><p>关于delete的请求 注意网址请求要加<code>=</code> <code>&#39;/category/delete?id=&#39;+string</code>就像这样</p>
+</li>
+<li><p>在配置pinia的peisist时不要写在函数体里面<code>&#123;&#123;persist&#125;&#125;</code>要写在函数体外面<code>&#123;&#125;,&#123;persist&#125;</code></p>
+</li>
+</ol>
+</li>
+</ul>
+<ol>
+<li>关于一些vue下常见出错误集锦(折磨人)<ul>
+<li>记得<code>&lt;script type=&#39;moudle&#39;&gt;</code>中添加moudle不然无法读取里面的函数</li>
+<li>记得<code>data()&#123;函数中要加return&#123;&#125;&#125;</code>不然会运行不成功</li>
+<li>记得<code>&#39;http://localhost:8080/article/search?category=&#39; + this.searchArticle.category + &#39;&amp;state=&#39;+this.searchArticle.state</code>中要写&#x3D;号不然数据传到后端无法识别</li>
 </ul>
 </li>
 </ol>
