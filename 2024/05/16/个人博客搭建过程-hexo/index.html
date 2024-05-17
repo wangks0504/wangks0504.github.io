@@ -16,7 +16,7 @@
 <meta property="og:description" content="2024-05-16 18.18.00">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-05-16T10:42:48.000Z">
-<meta property="article:modified_time" content="2024-05-16T14:41:07.657Z">
+<meta property="article:modified_time" content="2024-05-17T03:30:17.151Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -195,7 +195,7 @@
 </li>
 </ol>
 <h1 id="服务器安装"><a href="#服务器安装" class="headerlink" title="服务器安装"></a>服务器安装</h1><ol>
-<li><p>安装相关包<code>yum install -y curl-devel expat-devel gettext-devel openssl-devel alib-devel</code></p>
+<li><p>安装相关包<code>yum install -y curl-devel expat-devel gettext-devel openssl-devel zlib-devel</code></p>
 </li>
 <li><p>安装编译工具<code>yum install -y gcc perl-ExtUtils-MakeMaker package</code></p>
 </li>
@@ -219,7 +219,7 @@
 </li>
 <li><p>创建密码<code>passwd [username]</code></p>
 </li>
-<li><p>添加用户到用户组<code>usermod [username] -G whell</code></p>
+<li><p>添加用户到用户组<code>usermod [username] -G wheel</code></p>
 </li>
 <li><p>创建本地密钥<code>ssh-keygen -t rsa</code>(在win上运行)</p>
 </li>
@@ -232,6 +232,14 @@
 <li><p>复制本地密钥.pub结尾的那个到authorized_keys</p>
 </li>
 <li><p>退出当前用户<code>exit</code></p>
+</li>
+<li><p>建立放blog的git文件夹层<code>mkdir /home/blog</code></p>
+</li>
+<li><p>建立git仓库文件夹<code>mkdir  /home/git</code></p>
+<ol>
+<li>修改所有权和用户权限<code>chown -R wangks0504:wangks0504 /home/git</code></li>
+<li><code>chmod -R 755 /home/git</code></li>
+</ol>
 </li>
 <li><p>建立git仓库<code>git init --bare blog.git</code>  </p>
 </li>
@@ -272,9 +280,10 @@
             location = /50x.html &#123;
         &#125;
     &#125;
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">32. ssh无法连接问题</span><br><span class="line"></span><br><span class="line">    1. ```</span><br><span class="line">       vim /etc/ssh/sshd_config</span><br><span class="line">       增加如下修改:</span><br><span class="line">       PasswordAuthentication yes</span><br><span class="line">       </span><br><span class="line">       之后重启</span><br><span class="line">       systemctl restart sshd`</span><br></pre></td></tr></table></figure>
 </code></pre>
 </li>
-<li></li>
 </ol>
 
       

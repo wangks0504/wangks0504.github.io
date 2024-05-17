@@ -16,7 +16,7 @@
 <meta property="og:description" content="2024-03-16 21:06:02">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-03-16T13:06:02.000Z">
-<meta property="article:modified_time" content="2024-05-15T10:16:07.065Z">
+<meta property="article:modified_time" content="2024-05-17T18:13:29.678Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -355,26 +355,12 @@
            url:&#39;https://baidu.com&#39;
        &#125;
    &#125;
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">          这个url后面没有空格不然会导致无法正确连接</span><br><span class="line">         </span><br><span class="line">    2. 在`&lt;div&gt;`中引用函数注意在data中的函数需要把主函数也写上 而跟data同级的函数可以直接调用不用写主函数  如果违反则无法实现功能</span><br><span class="line">    </span><br><span class="line">    3. 关于delete的请求 注意网址请求要加`=` `&#x27;/category/delete?id=&#x27;+string`就像这样</span><br><span class="line">    </span><br><span class="line">    4. 在配置pinia的peisist时不要写在函数体里面`&#123;&#123;persist&#125;&#125;`要写在函数体外面`&#123;&#125;,&#123;persist&#125;`</span><br><span class="line">1. 关于一些vue下常见出错误集锦(折磨人)</span><br><span class="line">   - 记得`&lt;script type=&#x27;moudle&#x27;&gt;`中添加moudle不然无法读取里面的函数</span><br><span class="line">   - 记得`data()&#123;函数中要加return&#123;&#125;&#125;`不然会运行不成功</span><br><span class="line">   - 记得`&#x27;http://localhost:8080/article/search?category=&#x27; + this.searchArticle.category + &#x27;&amp;state=&#x27;+this.searchArticle.state`中要写=号不然数据传到后端无法识别</span><br><span class="line"></span><br><span class="line"># 部署</span><br><span class="line"></span><br><span class="line">1. 配置nginx反向代理解决vue中配置的跨域不生效的问题</span><br><span class="line"></span><br><span class="line">   ```java</span><br><span class="line">   server &#123;</span><br><span class="line">       listen 80;</span><br><span class="line">       server_name yourdomain.com;  # 替换为你的域名</span><br><span class="line">   </span><br><span class="line">       # 配置服务静态文件</span><br><span class="line">       location / &#123;</span><br><span class="line">           root /path/to/your/vue/project;  # 替换为你 Vue 项目打包后的目录</span><br><span class="line">           try_files $uri $uri/ /index.html;</span><br><span class="line">       &#125;</span><br><span class="line">   </span><br><span class="line">       # 配置反向代理，将 /api 的请求代理到后端服务器</span><br><span class="line">       location /api/ &#123;</span><br><span class="line">           proxy_pass http://121.41.121.72:8080/;  # 替换为你的后端服务器地址</span><br><span class="line">           proxy_set_header Host $host;</span><br><span class="line">           proxy_set_header X-Real-IP $remote_addr;</span><br><span class="line">           proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</span><br><span class="line">           proxy_set_header X-Forwarded-Proto $scheme;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line">   </span><br></pre></td></tr></table></figure>
 </code></pre>
-<p> 这个url后面没有空格不然会导致无法正确连接</p>
-</li>
-<li><p>在<code>&lt;div&gt;</code>中引用函数注意在data中的函数需要把主函数也写上 而跟data同级的函数可以直接调用不用写主函数  如果违反则无法实现功能</p>
-</li>
-<li><p>关于delete的请求 注意网址请求要加<code>=</code> <code>&#39;/category/delete?id=&#39;+string</code>就像这样</p>
-</li>
-<li><p>在配置pinia的peisist时不要写在函数体里面<code>&#123;&#123;persist&#125;&#125;</code>要写在函数体外面<code>&#123;&#125;,&#123;persist&#125;</code></p>
 </li>
 </ol>
 </li>
 </ul>
-<ol>
-<li>关于一些vue下常见出错误集锦(折磨人)<ul>
-<li>记得<code>&lt;script type=&#39;moudle&#39;&gt;</code>中添加moudle不然无法读取里面的函数</li>
-<li>记得<code>data()&#123;函数中要加return&#123;&#125;&#125;</code>不然会运行不成功</li>
-<li>记得<code>&#39;http://localhost:8080/article/search?category=&#39; + this.searchArticle.category + &#39;&amp;state=&#39;+this.searchArticle.state</code>中要写&#x3D;号不然数据传到后端无法识别</li>
-</ul>
-</li>
-</ol>
 
       
 
