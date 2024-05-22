@@ -16,7 +16,7 @@
 <meta property="og:description" content="2024-02-29 11:04:48">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-02-29T03:04:48.758Z">
-<meta property="article:modified_time" content="2024-05-17T18:07:53.370Z">
+<meta property="article:modified_time" content="2024-05-21T07:43:25.807Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -282,18 +282,125 @@
 </ul>
 </li>
 </ul>
-<h1 id="Linux下的mysql"><a href="#Linux下的mysql" class="headerlink" title="Linux下的mysql"></a>Linux下的mysql</h1><ul>
-<li><p>启动mysql<code>sudo systemctl start mysql</code></p>
-</li>
-<li><p>设置开机自启动<code>sudo systemctl enable mysql</code></p>
-</li>
-<li><p>检查运行状态<code>sudo systemctl status mysql</code></p>
-</li>
-<li><p>以管理员运行数据库<code>mysql -u root -p</code></p>
-</li>
-<li></li>
-</ul>
-<p>​        </p>
+<h2 id="用代码连接数据库"><a href="#用代码连接数据库" class="headerlink" title="用代码连接数据库"></a>用代码连接数据库</h2><pre><code class="java">   package sql;/*
+ * 功能：连接数据库
+ * */
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+public class SqlConn &#123;
+ Connection ct=null;//数据库连接状态
+ PreparedStatement ps=null;//数据库预编译状态
+ ResultSet rs=null;//数据库结果
+ //下面的是数据库的一些基本信息
+ String driver=&quot;com.mysql.cj.jdbc.Driver&quot;;
+ String dburl=&quot;jdbc:mysql://localhost:3306/&quot;;
+ String userName=&quot;&quot;;
+ String password=&quot;&quot;;
+ 
+ //实现查询功能的方法
+ public ResultSet sqlQuery(String sql)
+ &#123;
+     
+     try &#123;
+         //加载驱动
+         Class.forName(driver);
+         ct=DriverManager.getConnection(dburl,userName,password);//调用connection来传一下要连接的数据库的基本信息
+         ps=ct.prepareStatement(sql);//传输sql语句
+         rs=ps.executeQuery();//运行结果
+         
+     &#125; catch (Exception e) &#123;
+         e.printStackTrace();
+         // TODO: handle exception
+     &#125;
+     return rs;
+ &#125;
+ //实现添加，修改功能 的方法
+ public void sqlUpdate(String sql)
+ &#123;
+     try &#123;
+         //加载驱动
+         Class.forName(driver);
+         ct=DriverManager.getConnection(dburl,userName,password);
+         ps=ct.prepareStatement(sql);
+         //执行添加，更新操作
+         int i=ps.executeUpdate();//返回一个值，如果为1则表示添加成功。
+         if(i==1)
+         &#123;
+             System.out.println(&quot;数据添加/修改成功！&quot;);
+         &#125;
+         else
+         &#123;
+             System.out.println(&quot;数据添加/修改失败！&quot;);
+         &#125;
+     &#125; catch (Exception e) &#123;
+         e.printStackTrace();
+         // TODO: handle exception
+     &#125;
+ &#125;
+ //实现删除学生记录的方法
+ public void sqlDelete(String sql)//数据库的删除操作
+ &#123;
+     try &#123;
+         //加载驱动
+         System.out.println(&quot;ok&quot;);
+         Class.forName(driver);
+         ct=DriverManager.getConnection(dburl,userName,password);
+         ps=ct.prepareStatement(sql);
+         System.out.println(&quot;ok1&quot;);
+         //执行添加，更新操作
+         int i=ps.executeUpdate();//返回一个值，如果为1则表示删除成功。
+         if(i==1)
+         &#123;
+             System.out.println(&quot;数据删除成功！&quot;);
+         &#125;
+         else
+         &#123;
+             System.out.println(&quot;数据删除失败！&quot;);
+         &#125;
+     &#125; catch (Exception e) &#123;
+         e.printStackTrace();
+         // TODO: handle exception
+     &#125;
+ &#125;
+ //实现关闭数据库连接的功能MM
+ public void closeSqlConn()//关闭数据库
+ &#123;
+     try &#123;
+         if(rs!=null)rs.close();//开着的都给我关咯
+
+         if(ps!=null)ps.close();//开着的都给我关咯
+         if(ct!=null)ct.close();//开着的都给我关咯
+     &#125; catch (Exception e) &#123;
+         e.printStackTrace();//巴拉巴拉
+         // TODO: handle exception
+     &#125;
+ &#125;
+&#125;
+
+
+# Linux下的mysql
+
+- 启动mysql`sudo systemctl start mysql`
+- 设置开机自启动`sudo systemctl enable mysql`
+- 检查运行状态`sudo systemctl status mysql`
+
+- 以管理员运行数据库`mysql -u root -p`
+- 
+
+
+
+
+
+
+
+  
+
+​        
+</code></pre>
 
       
 

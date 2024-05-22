@@ -16,7 +16,7 @@
 <meta property="og:description" content="2024-03-15 20:16:26">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-03-15T12:16:26.000Z">
-<meta property="article:modified_time" content="2024-03-17T09:12:59.067Z">
+<meta property="article:modified_time" content="2024-05-21T07:43:11.570Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -235,6 +235,110 @@
 </ul>
 </li>
 </ul>
+<ol>
+<li>格式</li>
+<li>json 和 param的区别<br>- json左右两边都带有””,param只有右边带””</li>
+<li>HTTP</li>
+<li>响应状态码</li>
+</ol>
+<h2 id="一、状态码大类"><a href="#一、状态码大类" class="headerlink" title="一、状态码大类"></a>一、状态码大类</h2><table>
+<thead>
+<tr>
+<th>状态码分类</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1xx</td>
+<td><strong>响应中</strong>——临时状态码，表示请求已经接受，告诉客户端应该继续请求或者如果它已经完成则忽略它</td>
+</tr>
+<tr>
+<td>2xx</td>
+<td><strong>成功</strong>——表示请求已经被成功接收，处理已完成</td>
+</tr>
+<tr>
+<td>3xx</td>
+<td><strong>重定向</strong>——重定向到其它地方：它让客户端再发起一个请求以完成整个处理。</td>
+</tr>
+<tr>
+<td>4xx</td>
+<td><strong>客户端错误</strong>——处理发生错误，责任在客户端，如：客户端的请求一个不存在的资源，客户端未被授权，禁止访问等</td>
+</tr>
+<tr>
+<td>5xx</td>
+<td><strong>服务器端错误</strong>——处理发生错误，责任在服务端，如：服务端抛出异常，路由出错，HTTP版本不支持等</td>
+</tr>
+</tbody></table>
+<h2 id="二、常见的响应状态码"><a href="#二、常见的响应状态码" class="headerlink" title="二、常见的响应状态码"></a>二、常见的响应状态码</h2><table>
+<thead>
+<tr>
+<th>状态码</th>
+<th>英文描述</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>200</td>
+<td><strong><code>OK</code></strong></td>
+<td>客户端请求成功，即<strong>处理成功</strong>，这是我们最想看到的状态码</td>
+</tr>
+<tr>
+<td>302</td>
+<td><strong><code>Found</code></strong></td>
+<td>指示所请求的资源已移动到由<code>Location</code>响应头给定的 URL，浏览器会自动重新访问到这个页面</td>
+</tr>
+<tr>
+<td>304</td>
+<td><strong><code>Not Modified</code></strong></td>
+<td>告诉客户端，你请求的资源至上次取得后，服务端并未更改，你直接用你本地缓存吧。隐式重定向</td>
+</tr>
+<tr>
+<td>400</td>
+<td><strong><code>Bad Request</code></strong></td>
+<td>客户端请求有<strong>语法错误</strong>，不能被服务器所理解</td>
+</tr>
+<tr>
+<td>403</td>
+<td><strong><code>Forbidden</code></strong></td>
+<td>服务器收到请求，但是<strong>拒绝提供服务</strong>，比如：没有权限访问相关资源</td>
+</tr>
+<tr>
+<td>&#x3D;&#x3D;404&#x3D;&#x3D;</td>
+<td><strong><code>Not Found</code></strong></td>
+<td><strong>请求资源不存在</strong>，一般是URL输入有误，或者网站资源被删除了</td>
+</tr>
+<tr>
+<td>405</td>
+<td><strong><code>Method Not Allowed</code></strong></td>
+<td>请求方式有误，比如应该用GET请求方式的资源，用了POST</td>
+</tr>
+<tr>
+<td>428</td>
+<td><strong><code>Precondition Required</code></strong></td>
+<td><strong>服务器要求有条件的请求</strong>，告诉客户端要想访问该资源，必须携带特定的请求头</td>
+</tr>
+<tr>
+<td>429</td>
+<td><strong><code>Too Many Requests</code></strong></td>
+<td>指示用户在给定时间内发送了<strong>太多请求</strong>（“限速”），配合 Retry-After(多长时间后可以请求)响应头一起使用</td>
+</tr>
+<tr>
+<td>431</td>
+<td><strong><code> Request Header Fields Too Large</code></strong></td>
+<td><strong>请求头太大</strong>，服务器不愿意处理请求，因为它的头部字段太大。请求可以在减少请求头域的大小后重新提交。</td>
+</tr>
+<tr>
+<td>&#x3D;&#x3D;500&#x3D;&#x3D;</td>
+<td><strong><code>Internal Server Error</code></strong></td>
+<td><strong>服务器发生不可预期的错误</strong>。服务器出异常了，赶紧看日志去吧</td>
+</tr>
+<tr>
+<td>503</td>
+<td><strong><code>Service Unavailable</code></strong></td>
+<td><strong>服务器尚未准备好处理请求</strong>，服务器刚刚启动，还未初始化好</td>
+</tr>
+</tbody></table>
+<p>状态码大全：<a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/chapter/13553">https://cloud.tencent.com/developer/chapter/13553</a> </p>
 <h3 id="结束了-完结撒花lvlvlvlv"><a href="#结束了-完结撒花lvlvlvlv" class="headerlink" title="结束了 完结撒花lvlvlvlv"></a>结束了 完结撒花lvlvlvlv</h3>
       
 
