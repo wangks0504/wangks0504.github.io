@@ -172,65 +172,10 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h6 id="2024-05-21-16-10-23"><a href="#2024-05-21-16-10-23" class="headerlink" title="2024-05-21 16:10:23"></a>2024-05-21 16:10:23</h6><h1 id="IP地址操作-IDEA"><a href="#IP地址操作-IDEA" class="headerlink" title="IP地址操作(IDEA)"></a>IP地址操作(IDEA)</h1><pre><code>1. 根据`InetAddress`包中的`get+ | LocalHost | ByName | 获取Host对象
-2. 通过对InetAddress获得的对象调用下面的函数进行进一步对ip的操作
-</code></pre>
-<h1 id="UDP通信"><a href="#UDP通信" class="headerlink" title="UDP通信"></a>UDP通信</h1><p><strong>java.net.DatagramSocket 类实现UDP</strong></p>
-<ul>
-<li>通过创建对象以此来调用对象下面的函数<br>- <code>sent(放Packet对象)</code>函数<br>   - <code>receive(放Packet对象)</code>函数<ul>
-<li>Socket中一般在<strong>接受数据需要端口</strong>发送数据端口由Packet定义</li>
-</ul>
-</li>
-</ul>
-<p><strong>java.net.DatagramPacket类来接受数据</strong></p>
-<ul>
-<li>通过创建对象以此来调用对象下面的函数</li>
-<li>Packet中的port定义用于<strong>发送数据需要端口</strong>接受数据会<strong>自动定义端口</strong></li>
-</ul>
-<hr>
-<p><strong>数据处理流程(UDP)(按照数字顺序)</strong></p>
-<ol>
-<li><p>客户端通过<strong>Socket定义端口</strong></p>
-<ol>
-<li><p>通过<strong>定义Pocket中的端口</strong>来指定数据发送到哪个端口的Socket中  </p>
-</li>
-<li><p>代码实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;请输入---stop---来停止转发&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">            <span class="type">Scanner</span> <span class="variable">in</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line">            <span class="type">String</span> <span class="variable">input</span> <span class="operator">=</span> in.nextLine();</span><br><span class="line">            <span class="type">boolean</span> <span class="variable">stop</span> <span class="operator">=</span> input.equals(<span class="string">&quot;stop&quot;</span>);</span><br><span class="line">            <span class="type">byte</span>[] bytes = input.getBytes(StandardCharsets.UTF_8);</span><br><span class="line">            <span class="type">DatagramSocket</span> <span class="variable">list</span> <span class="operator">=</span>   <span class="keyword">new</span> <span class="title class_">DatagramSocket</span>();</span><br><span class="line">            <span class="type">InetAddress</span> <span class="variable">localHost</span> <span class="operator">=</span> InetAddress.getLocalHost();</span><br><span class="line">            <span class="type">DatagramPacket</span> <span class="variable">packet</span> <span class="operator">=</span> <span class="keyword">new</span>  <span class="title class_">DatagramPacket</span>(bytes,bytes.length,localHost,<span class="number">1234</span>);</span><br><span class="line">            list.send(packet);</span><br><span class="line">            <span class="keyword">if</span> (stop)</span><br><span class="line">            &#123;</span><br><span class="line">                list.close();</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;&#125;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></li>
-</ol>
-</li>
-<li><p>服务端通过<strong>Socket定义端口</strong></p>
-<ol>
-<li><p>对传进来的Pocket进行相关操作</p>
-</li>
-<li><p>代码实现</p>
-<details>
-  <summary>点击展开查看代码</summary>
-
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">      <span class="type">DatagramSocket</span> <span class="variable">takeIn</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">DatagramSocket</span>(<span class="number">1234</span>);</span><br><span class="line">      <span class="type">byte</span>[] From1234 = <span class="keyword">new</span> <span class="title class_">byte</span>[<span class="number">1024</span> * <span class="number">64</span>];</span><br><span class="line"></span><br><span class="line">      <span class="type">DatagramPacket</span> <span class="variable">getSourceFrom1234</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">DatagramPacket</span>(From1234, From1234.length);</span><br><span class="line">      <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">          takeIn.receive(getSourceFrom1234);</span><br><span class="line">          <span class="type">String</span> <span class="variable">rc</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">String</span>(From1234, <span class="number">0</span>, From1234.length);</span><br><span class="line">          System.out.println(rc);</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/details&gt;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        <span class="type">DatagramSocket</span> <span class="variable">takeIn</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">DatagramSocket</span>(<span class="number">1234</span>);</span><br><span class="line">        <span class="type">byte</span>[] From1234 = <span class="keyword">new</span> <span class="title class_">byte</span>[<span class="number">1024</span> * <span class="number">64</span>];</span><br><span class="line"></span><br><span class="line">      <span class="type">DatagramPacket</span> <span class="variable">getSourceFrom1234</span> <span class="operator">=</span> <span class="keyword">new</span>  <span class="title class_">DatagramPacket</span>(From1234, From1234.length);</span><br><span class="line">        <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">            takeIn.receive(getSourceFrom1234);</span><br><span class="line">            <span class="type">String</span> <span class="variable">rc</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">String</span>(From1234,<span class="number">0</span> ,From1234.length);</span><br><span class="line">            System.out.println(rc);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></details></li>
-</ol>
-</li>
-</ol>
-<hr>
-<p><strong>数据处理流程(TCP)(按照数字顺序)</strong></p>
-<ol>
-<li>客户端通过<strong>Socket定义端口</strong></li>
-</ol>
-<p>​		3. 通过<strong>定义Pocket中的端口</strong>来指定数据发送到哪个端口的Socket中</p>
-<ol start="2">
-<li>服务端通过<strong>Socket定义端口</strong></li>
-</ol>
-<p>​		4.  对传进来的Pocket进行相关操作</p>
-
+        <h6 id="2024-05-21-16-10-23"><a href="#2024-05-21-16-10-23" class="headerlink" title="2024-05-21 16:10:23"></a>2024-05-21 16:10:23</h6>
+        
+          <a class="article-more-a" href="/2024/05/21/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/#more">more >></a>
+        
       
 
       
