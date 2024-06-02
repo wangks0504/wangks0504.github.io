@@ -6,13 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://wangks0504.github.io">
-  <title>Archives | 知然</title>
+  <title>Docker学习路程 | 知然</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="知然">
-<meta property="og:url" content="http://wangks0504.github.io/archives/page/2/index.html">
+  <meta name="description" content="2024-06-02 14:50:32">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Docker学习路程">
+<meta property="og:url" content="http://wangks0504.github.io/2024/06/02/Docker%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%A8%8B/index.html">
 <meta property="og:site_name" content="知然">
+<meta property="og:description" content="2024-06-02 14:50:32">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-06-02T06:50:32.000Z">
+<meta property="article:modified_time" content="2024-06-02T16:43:29.245Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -150,160 +154,379 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Docker学习路程" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Docker学习路程
+    </h1>
+  
+
+        
+        <a href="/2024/06/02/Docker%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%A8%8B/" class="archive-article-date">
+  	<time datetime="2024-06-02T06:50:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-06-02</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h6 id="2024-06-02-14-50-32"><a href="#2024-06-02-14-50-32" class="headerlink" title="2024-06-02 14:50:32"></a>2024-06-02 14:50:32</h6><span id="more"></span>
+
+<h1 id="命令解读"><a href="#命令解读" class="headerlink" title="命令解读"></a>命令解读</h1><ol>
+<li>运行 服务</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">docker run -d \  # docker起始命令 run 运行(起始命令子命令) -d 让容器在后台运行</span><br><span class="line"></span><br><span class="line">--name mysql_new \ # 给容器起名字</span><br><span class="line"></span><br><span class="line">-p 3305:3306 \ # 设置端口映射(3306为默认端口 3305为映射端口 意味着可以通过本机3305端口访问这个容器中3306端口,意味着可以通过3305端口访问这个容器中的3306的mysql服务)</span><br><span class="line"></span><br><span class="line">-e TZ=Asia/Shanghai \ # 设置环境变量 设置时区为上海</span><br><span class="line"></span><br><span class="line">-e MYSQL_ROOT_PASSWORD=8172170613Oo \ # 设置ROOT账号的密码</span><br><span class="line"></span><br><span class="line">--network 网桥</span><br><span class="line"></span><br><span class="line">-v /root/mysql_test/data:/var/lib/mysql \ #数据</span><br><span class="line"></span><br><span class="line">-v /root/mysql_test/conf:/etc/mysql/conf.d \ #配置文件</span><br><span class="line"></span><br><span class="line">-v /root/mysql_test/init:/docker-entrypoint-initdb.d \ #初始化文件可以放.sql文件自动创建表</span><br><span class="line"></span><br><span class="line">-v 数据卷:容器内目录 #进行数据卷的挂载</span><br><span class="line"></span><br><span class="line">mysql # 运行的镜像名称</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="常见命令"><a href="#常见命令" class="headerlink" title="常见命令"></a>常见命令</h1><ol>
+<li>拉取镜像<code>docker pull</code></li>
+<li>推送镜像<code>docker push</code></li>
+<li>查看本地镜像<code>docker images</code></li>
+<li>删除镜像<code>docker rmi</code></li>
+<li>本地镜像操作<ul>
+<li>构建镜像<code>docker build</code></li>
+<li>保存镜像<code>docker save</code></li>
+<li>加载镜像<code>docker load</code></li>
+</ul>
+</li>
+<li>运行<code>docker run</code><ul>
+<li>停止<code>docker stop</code></li>
+<li>开始<code>docker satrt</code></li>
+</ul>
+</li>
+<li>查看docker进程<code>docker ps</code><ul>
+<li>查看全部docker进程<code>docker ps -a</code></li>
+<li>对输出内容进行格式化<code>docker ps --format</code></li>
+</ul>
+</li>
+<li>删除容器<code>docker rm</code></li>
+<li>查看logs<code>docker logs</code><ul>
+<li>持续跟踪日志<code>docker logs -f</code></li>
+</ul>
+</li>
+<li>进入容器<code>docker exec</code></li>
+<li>查容器详情<code>docker inspect</code></li>
+</ol>
+<h2 id="数据卷"><a href="#数据卷" class="headerlink" title="数据卷"></a>数据卷</h2><ol>
+<li>创建数据卷<code>docker volume create</code></li>
+<li>查看所有数据卷<code>docker volume ls</code></li>
+<li>删除指定数据卷<code>docker volume rm</code></li>
+<li>查看某个数据卷的详情<code>docker volume inspect</code></li>
+<li>清楚数据卷<code>docker volume prune</code></li>
+</ol>
+<h2 id="DockerFile语法"><a href="#DockerFile语法" class="headerlink" title="DockerFile语法"></a>DockerFile语法</h2><ol>
+<li><p>指定基础镜像<code>from centos:6</code> </p>
+</li>
+<li><p>设置环境变量,可在后面指令使用<code>env key value</code></p>
+</li>
+<li><p>拷贝本地文件到镜像的指定目录<code>copy ./jrell.tar.gz /tmp</code></p>
+</li>
+<li><p>执行linux的shell命令,一般是安装过程的命令<code>run tar -zxvf /tmp/jrell.tar.gz &amp;&amp; exports path=/tmp/jrell:$path</code></p>
+</li>
+<li><p>指定容器运行时的监听的端口 是给镜像使用者看的<code>expose 8080</code></p>
+</li>
+<li><p>镜像应用中的启动命令,容器运行时调用<code>entrypoint java -jar xx.jar</code></p>
+</li>
+<li><p>举例</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># 基础镜像</span><br><span class="line">FROM openjdk:11.0-jre-buster</span><br><span class="line"># 设定时区</span><br><span class="line">ENV TZ=Asia/Shanghai</span><br><span class="line">RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime &amp;&amp; echo $TZ &gt; /etc/timezone</span><br><span class="line"># 拷贝jar包</span><br><span class="line">COPY docker-demo.jar /app.jar</span><br><span class="line"># 入口</span><br><span class="line">ENTRYPOINT [&quot;java&quot;, &quot;-jar&quot;, &quot;/app.jar&quot;]</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="自定义网络"><a href="#自定义网络" class="headerlink" title="自定义网络"></a>自定义网络</h2><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+<th>文档地址</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>docker network create</code></td>
+<td>创建一个网络</td>
+<td><a target="_blank" rel="noopener" href="https://docs.docker.com/engine/reference/commandline/network_create/">docker network create</a></td>
+</tr>
+<tr>
+<td><code>docker network ls</code></td>
+<td>查看所有网络</td>
+<td><a target="_blank" rel="noopener" href="https://docs.docker.com/engine/reference/commandline/network_ls/">docker network ls</a></td>
+</tr>
+<tr>
+<td><code>docker network rm</code></td>
+<td>删除指定网络</td>
+<td><a target="_blank" rel="noopener" href="https://docs.docker.com/engine/reference/commandline/network_rm/">docker network rm</a></td>
+</tr>
+<tr>
+<td><code>docker network prune</code></td>
+<td>清除未使用的网络</td>
+<td><a target="_blank" rel="noopener" href="https://docs.docker.com/engine/reference/commandline/network_prune/">docker network prune</a></td>
+</tr>
+<tr>
+<td><code>docker network connect</code></td>
+<td>使指定容器连接加入某网络</td>
+<td><a target="_blank" rel="noopener" href="https://docs.docker.com/engine/reference/commandline/network_connect/">docker network connect</a></td>
+</tr>
+<tr>
+<td><code>docker network disconnect</code></td>
+<td>使指定容器连接离开某网络</td>
+<td><a target="_blank" rel="noopener" href="https://docs.docker.com/engine/reference/commandline/network_disconnect/">docker network disconnect</a></td>
+</tr>
+<tr>
+<td><code>docker network inspect</code></td>
+<td>查看网络详细信息</td>
+<td><a target="_blank" rel="noopener" href="https://docs.docker.com/engine/reference/commandline/network_inspect/">docker network inspect</a></td>
+</tr>
+</tbody></table>
+<h2 id="DockerCompose-实现多容器相互关联"><a href="#DockerCompose-实现多容器相互关联" class="headerlink" title="DockerCompose(实现多容器相互关联)"></a>DockerCompose(实现多容器相互关联)</h2><ol>
+<li>部署命令<code>docker compose [options] [command]</code></li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>参数或指令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Options</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td><code>-f</code></td>
+<td>指定compose文件的路径和名称</td>
+</tr>
+<tr>
+<td></td>
+<td><code>-p</code></td>
+<td>指定project名称</td>
+</tr>
+<tr>
+<td><strong>Commands</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td><code>up</code></td>
+<td>创建并启动所有service容器</td>
+</tr>
+<tr>
+<td></td>
+<td><code>down</code></td>
+<td>停止并移除所有容器、网络</td>
+</tr>
+<tr>
+<td></td>
+<td><code>ps</code></td>
+<td>列出所有启动的容器</td>
+</tr>
+<tr>
+<td></td>
+<td><code>logs</code></td>
+<td>查看指定容器的日志</td>
+</tr>
+<tr>
+<td></td>
+<td><code>stop</code></td>
+<td>停止容器</td>
+</tr>
+<tr>
+<td></td>
+<td><code>start</code></td>
+<td>启动容器</td>
+</tr>
+<tr>
+<td></td>
+<td><code>restart</code></td>
+<td>重新启动容器</td>
+</tr>
+<tr>
+<td></td>
+<td><code>top</code></td>
+<td>查看运行的进程</td>
+</tr>
+<tr>
+<td></td>
+<td><code>exec</code></td>
+<td>在指定的运行中容器中执行命令</td>
+</tr>
+</tbody></table>
+<ol start="2">
+<li><p><strong>DockerCompose</strong>代码示例</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&quot;3.8&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">mysql:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">mysql</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">mysql</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;3306:3306&quot;</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="attr">TZ:</span> <span class="string">Asia/Shanghai</span></span><br><span class="line">      <span class="attr">MYSQL_ROOT_PASSWORD:</span> <span class="number">123</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;./mysql/conf:/etc/mysql/conf.d&quot;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;./mysql/data:/var/lib/mysql&quot;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;./mysql/init:/docker-entrypoint-initdb.d&quot;</span></span><br><span class="line">    <span class="attr">networks:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">hm-net</span></span><br><span class="line">  <span class="attr">hmall:</span></span><br><span class="line">    <span class="attr">build:</span> </span><br><span class="line">      <span class="attr">context:</span> <span class="string">.</span></span><br><span class="line">      <span class="attr">dockerfile:</span> <span class="string">Dockerfile</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">hmall</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;8080:8080&quot;</span></span><br><span class="line">    <span class="attr">networks:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">hm-net</span></span><br><span class="line">    <span class="attr">depends_on:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">mysql</span></span><br><span class="line">  <span class="attr">nginx:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">nginx</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">nginx</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;18080:18080&quot;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;18081:18081&quot;</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;./nginx/nginx.conf:/etc/nginx/nginx.conf&quot;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;./nginx/html:/usr/share/nginx/html&quot;</span></span><br><span class="line">    <span class="attr">depends_on:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">hmall</span></span><br><span class="line">    <span class="attr">networks:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">hm-net</span></span><br><span class="line"><span class="attr">networks:</span></span><br><span class="line">  <span class="attr">hm-net:</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">hmall</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>你的支持是对我学习路上最大的鼓励<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/zhifubao.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/weixin.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2024" class="archive-year">2024</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2024/03/05/git%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" class="archive-article-date">
-  	<time datetime="2024-03-05T12:06:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-03-05</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2024/03/05/git%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">git的一些基础知识</a>
-    </h1>
-  
+      
 
-        <div class="article-info info-on-right">
-          
-          
+      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://wangks0504.github.io/2024/06/02/Docker%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%A8%8B/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2024/03/02/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/" class="archive-article-date">
-  	<time datetime="2024-03-02T12:28:08.187Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-03-02</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2024/05/21/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">网络编程</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2024/03/02/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">数据结构和算法</a>
-    </h1>
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Docker学习路程" data-title="Docker学习路程" data-url="http://wangks0504.github.io/2024/06/02/Docker%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%A8%8B/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"1"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+  
+  
+  
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+<script>
+  var cloudTieConfig = {
+    url: "http://wangks0504.github.io/2024/06/02/Docker%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%A8%8B/", 
+    sourceId: "Docker学习路程",
+    productKey: "2",
+    target: "cloud-tie-wrapper"
+  };
+</script>
+<script src="//img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2024/03/01/java%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%A8%8B/" class="archive-article-date">
-  	<time datetime="2024-03-01T15:26:34.923Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-03-01</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2024/03/01/java%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%A8%8B/">java学习路程</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2024/02/29/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%A8%8B/" class="archive-article-date">
-  	<time datetime="2024-02-29T03:04:48.758Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-02-29</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2024/02/29/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%A8%8B/">数据库学习路程</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2024/02/15/%E5%85%B3%E4%BA%8Elinux-ubuntu-%E7%9A%84-%E5%91%BD%E4%BB%A4%E5%B8%B8%E7%94%A8%E9%9B%86%E9%94%A6/" class="archive-article-date">
-  	<time datetime="2024-02-15T11:18:28.098Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-02-15</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2024/02/15/%E5%85%B3%E4%BA%8Elinux-ubuntu-%E7%9A%84-%E5%91%BD%E4%BB%A4%E5%B8%B8%E7%94%A8%E9%9B%86%E9%94%A6/">关于linux(ubuntu)的-*命令常用集锦</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/">&laquo; Prev</a><a class="page-number" href="/archives/">1</a><span class="page-number current">2</span>
-    </nav>
   
 
 
@@ -327,8 +550,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
