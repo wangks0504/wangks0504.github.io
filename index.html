@@ -144,6 +144,249 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-SpringCloud基础" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2024/06/24/SpringCloud%E5%9F%BA%E7%A1%80/">SpringCloud基础</a>
+    </h1>
+  
+
+        
+        <a href="/2024/06/24/SpringCloud%E5%9F%BA%E7%A1%80/" class="archive-article-date">
+  	<time datetime="2024-06-24T14:32:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-06-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <span id="more"></span>
+
+<h1 id="配置-Eureka-Server"><a href="#配置-Eureka-Server" class="headerlink" title="配置 Eureka Server"></a>配置 Eureka Server</h1><h3 id="1-创建一个新的-Spring-Boot-项目"><a href="#1-创建一个新的-Spring-Boot-项目" class="headerlink" title="1. 创建一个新的 Spring Boot 项目"></a>1. 创建一个新的 Spring Boot 项目</h3><p>使用 <a target="_blank" rel="noopener" href="https://start.spring.io/">Spring Initializr</a> 创建一个新的 Spring Boot 项目，选择以下依赖：</p>
+<ul>
+<li>Spring Boot DevTools</li>
+<li>Spring Web</li>
+<li>Eureka Server</li>
+</ul>
+<p>或者你可以手动在你的 <code>pom.xml</code> 文件中添加这些依赖：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependencies&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;spring-cloud-starter-netflix-eureka-server&lt;/artifactId&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;spring-boot-starter-actuator&lt;/artifactId&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">&lt;/dependencies&gt;</span><br></pre></td></tr></table></figure>
+
+<p>确保父 POM 文件包含 Spring Cloud 版本管理配置：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependencyManagement&gt;</span><br><span class="line">    &lt;dependencies&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-cloud-dependencies&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;Hoxton.SR10&lt;/version&gt;</span><br><span class="line">            &lt;type&gt;pom&lt;/type&gt;</span><br><span class="line">            &lt;scope&gt;import&lt;/scope&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">    &lt;/dependencies&gt;</span><br><span class="line">&lt;/dependencyManagement&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-在主类上添加-EnableEurekaServer-注解"><a href="#2-在主类上添加-EnableEurekaServer-注解" class="headerlink" title="2. 在主类上添加 @EnableEurekaServer 注解"></a>2. 在主类上添加 <code>@EnableEurekaServer</code> 注解</h3><p>创建一个 Spring Boot 主类，并添加 <code>@EnableEurekaServer</code> 注解：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">package com.example.eurekaserver;</span><br><span class="line"></span><br><span class="line">import org.springframework.boot.SpringApplication;</span><br><span class="line">import org.springframework.boot.autoconfigure.SpringBootApplication;</span><br><span class="line">import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;</span><br><span class="line"></span><br><span class="line">@SpringBootApplication</span><br><span class="line">@EnableEurekaServer</span><br><span class="line">public class EurekaServerApplication &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        SpringApplication.run(EurekaServerApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-配置-application-yml"><a href="#3-配置-application-yml" class="headerlink" title="3. 配置 application.yml"></a>3. 配置 <code>application.yml</code></h3><p>在 <code>src/main/resources</code> 目录下创建一个 <code>application.yml</code> 文件，并添加以下配置：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">server:</span><br><span class="line">  port: 8761</span><br><span class="line"></span><br><span class="line">eureka:</span><br><span class="line">  client:</span><br><span class="line">    register-with-eureka: false</span><br><span class="line">    fetch-registry: false</span><br><span class="line">  server:</span><br><span class="line">    enable-self-preservation: false</span><br><span class="line"></span><br><span class="line">spring:</span><br><span class="line">  application:</span><br><span class="line">    name: eureka-server</span><br></pre></td></tr></table></figure>
+
+<h2 id="配置-Eureka-Client"><a href="#配置-Eureka-Client" class="headerlink" title="配置 Eureka Client"></a>配置 Eureka Client</h2><h3 id="1-在现有的-Spring-Boot-项目中添加-Eureka-Client-依赖"><a href="#1-在现有的-Spring-Boot-项目中添加-Eureka-Client-依赖" class="headerlink" title="1. 在现有的 Spring Boot 项目中添加 Eureka Client 依赖"></a>1. 在现有的 Spring Boot 项目中添加 Eureka Client 依赖</h3><p>在你的客户端服务的 <code>pom.xml</code> 文件中添加以下依赖：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependencies&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;spring-cloud-starter-netflix-eureka-client&lt;/artifactId&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">&lt;/dependencies&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-在主类上添加-EnableEurekaClient-注解"><a href="#2-在主类上添加-EnableEurekaClient-注解" class="headerlink" title="2. 在主类上添加 @EnableEurekaClient 注解"></a>2. 在主类上添加 <code>@EnableEurekaClient</code> 注解</h3><p>在客户端服务的主类上添加 <code>@EnableEurekaClient</code> 注解：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">package com.example.clientservice;</span><br><span class="line"></span><br><span class="line">import org.springframework.boot.SpringApplication;</span><br><span class="line">import org.springframework.boot.autoconfigure.SpringBootApplication;</span><br><span class="line">import org.springframework.cloud.netflix.eureka.EnableEurekaClient;</span><br><span class="line"></span><br><span class="line">@SpringBootApplication</span><br><span class="line">@EnableEurekaClient</span><br><span class="line">public class ClientServiceApplication &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        SpringApplication.run(ClientServiceApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-配置-application-yml-1"><a href="#3-配置-application-yml-1" class="headerlink" title="3. 配置 application.yml"></a>3. 配置 <code>application.yml</code></h3><p>在 <code>src/main/resources</code> 目录下创建一个 <code>application.yml</code> 文件，并添加以下配置：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">server:</span><br><span class="line">  port: 8080</span><br><span class="line"></span><br><span class="line">eureka:</span><br><span class="line">  client:</span><br><span class="line">    service-url:</span><br><span class="line">      defaultZone: http://localhost:8761/eureka/</span><br><span class="line"></span><br><span class="line">spring:</span><br><span class="line">  application:</span><br><span class="line">    name: client-service</span><br></pre></td></tr></table></figure>
+
+<h1 id="Ribbon组件"><a href="#Ribbon组件" class="headerlink" title="Ribbon组件"></a>Ribbon组件</h1><ul>
+<li>实现负载均衡</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">加<span class="meta">@LoadBalance</span>注解在RestTemplate请求发送类上</span><br></pre></td></tr></table></figure>
+
+
+<ul>
+<li><p>调整负载均衡</p>
+<ul>
+<li><p>全局</p>
+</li>
+<li><pre><code class="java">@Bean
+    public IRule randomRule()&#123;
+        return new RandomRule();
+    &#125;//在实现类中添加
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 某个服务</span><br><span class="line"></span><br><span class="line"> - ```java</span><br><span class="line">   user-service:#服务名</span><br><span class="line">     ribbon:</span><br><span class="line">       NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule#随机</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+</ul>
+</li>
+<li><p>负载均衡原理</p>
+</li>
+<li><p><img src="/2024/06/24/SpringCloud%E5%9F%BA%E7%A1%80/E:%5Cblog%5Csource%5C_posts%5CSpringCloud%E5%9F%BA%E7%A1%80%5Cimage-20240626001709281.png" alt="image-20240626001709281"></p>
+<ol>
+<li><p>被LoadBalancerInterceptor.class负载均衡拦截器拦截</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> ClientHttpResponse <span class="title function_">intercept</span><span class="params">(<span class="keyword">final</span> HttpRequest request, <span class="keyword">final</span> <span class="type">byte</span>[] body, <span class="keyword">final</span> ClientHttpRequestExecution execution)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        <span class="type">URI</span> <span class="variable">originalUri</span> <span class="operator">=</span> request.getURI();</span><br><span class="line">        <span class="type">String</span> <span class="variable">serviceName</span> <span class="operator">=</span> originalUri.getHost();</span><br><span class="line">        Assert.state(serviceName != <span class="literal">null</span>, <span class="string">&quot;Request URI does not contain a valid hostname: &quot;</span> + originalUri);</span><br><span class="line">        <span class="keyword">return</span> (ClientHttpResponse)<span class="built_in">this</span>.loadBalancer.execute(serviceName, <span class="built_in">this</span>.requestFactory.createRequest(request, body, execution));</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>execute</code>接口传入<code>serviceName</code>调用执行下一步</p>
+</li>
+<li><p>在RibbonLoadBalancerClient.class中实现的execute接口</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> &lt;T&gt; T <span class="title function_">execute</span><span class="params">(String serviceId//这里接受的是serviceName</span></span><br><span class="line"><span class="params">                     , LoadBalancerRequest&lt;T&gt; request)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">       <span class="keyword">return</span> <span class="built_in">this</span>.execute(serviceId, (LoadBalancerRequest)request, (Object)<span class="literal">null</span>);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>下一步执行execute函数</p>
+</li>
+</ol>
+   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> &lt;T&gt; T <span class="title function_">execute</span><span class="params">(String serviceId, LoadBalancerRequest&lt;T&gt; request, Object hint)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">*********<span class="type">ILoadBalancer</span> <span class="variable">loadBalancer</span> <span class="operator">=</span> <span class="built_in">this</span>.getLoadBalancer(serviceId);*********</span><br><span class="line">     *******<span class="type">Server</span> <span class="variable">server</span> <span class="operator">=</span> <span class="built_in">this</span>.getServer(loadBalancer, hint);*********</span><br><span class="line">       <span class="keyword">if</span> (server == <span class="literal">null</span>) &#123;</span><br><span class="line">           <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">IllegalStateException</span>(<span class="string">&quot;No instances available for &quot;</span> + serviceId);</span><br><span class="line">       &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">           <span class="type">RibbonServer</span> <span class="variable">ribbonServer</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">RibbonServer</span>(serviceId, server, <span class="built_in">this</span>.isSecure(server, serviceId), <span class="built_in">this</span>.serverIntrospector(serviceId).getMetadata(server));</span><br><span class="line">           <span class="keyword">return</span> <span class="built_in">this</span>.execute(serviceId, (ServiceInstance)ribbonServer, (LoadBalancerRequest)request);</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li><p>loadBalancer中的allServerList存储某个serviceName的全部服务器端口地址</p>
+</li>
+<li><p>之后开始负载均衡选择服务器</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Server</span> <span class="variable">server</span> <span class="operator">=</span> <span class="built_in">this</span>.getServer(loadBalancer, hint);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>下一步跳到getServer函数</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">protected</span> Server <span class="title function_">getServer</span><span class="params">(ILoadBalancer loadBalancer, Object hint)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> loadBalancer == <span class="literal">null</span> ? <span class="literal">null</span> : loadBalancer.chooseServer(hint != <span class="literal">null</span> ? hint : <span class="string">&quot;default&quot;</span>);<span class="comment">//chooseServer是负载均衡选择函数</span></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>调用父类chooseServer</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> <span class="built_in">super</span>.chooseServer(key);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>跳到父类chooseServer继续走到</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> <span class="built_in">this</span>.rule.choose(key);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>rule是一个IRule对象(IRule通过传入的key选择负载均衡算法)</p>
+</li>
+</ol>
+   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">protected</span> IRule rule;<span class="comment">//IRule中I为接口缩写</span></span><br></pre></td></tr></table></figure>
+
+<ol start="11">
+<li><p>查看IRule实现类其为负载均衡的调用算法</p>
+<ul>
+<li><p>RoundRobinRule.class&#x2F;&#x2F;轮询算法</p>
+<pre><code>- RandomRule.class//随机算法
+   
+         - | 内置负载均衡规则类            | 规则描述                                                     |
+         | ----------------------------- | ------------------------------------------------------------ |
+ | **RoundRobinRule**            | 简单轮询服务列表来选择服务器。它是Ribbon默认的负载均衡规则。 |
+ | **AvailabilityFilteringRule** | 对以下两种服务器进行忽略：&lt;br&gt;（1）在默认情况下，这台服务器如果3次连接失败，这台服务器就会被设置为“短路”状态。短路状态将持续30秒，如果再次连接失败，短路的持续时间就会几何级地增加。&lt;br&gt;（2）并发数过高的服务器。如果一台服务器的并发连接数过高，配置了AvailabilityFilteringRule规则的客户端也会将其忽略。并发连接数的上限，可以由客户端的&lt;clientName&gt;.&lt;clientConfigNamespace&gt;.ActiveConnectionsLimit属性进行配置。 |
+ | **WeightedResponseTimeRule**  | 为每一个服务器赋予一个权重值。服务器响应时间越长，这个服务器的权重就越小。这个规则会随机选择服务器，这个权重值会影响服务器的选择。 |
+ | **ZoneAvoidanceRule**         | 以区域可用的服务器为基础进行服务器的选择。使用Zone对服务器进行分类，这个Zone可以理解为一个机房、一个机架等。而后再对Zone内的多个服务器做轮询。 |
+ | **BestAvailableRule**         | 忽略哪些短路的服务器，并选择并发数较低的服务器。             |
+ | **RandomRule**                | 随机选择一个可用的服务器。                                   |
+ | **RetryRule**                 | 重试机制的选择逻辑                                           |
+</code></pre>
+</li>
+</ul>
+</li>
+</ol>
+<p>​</p>
+</li>
+</ul>
+<p>	</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2024/06/24/SpringCloud%E5%9F%BA%E7%A1%80/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-数据结dog" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2024/06/13/%E6%95%B0%E6%8D%AE%E7%BB%93dog/">数据结dog</a>
+    </h1>
+  
+
+        
+        <a href="/2024/06/13/%E6%95%B0%E6%8D%AE%E7%BB%93dog/" class="archive-article-date">
+  	<time datetime="2024-06-13T14:50:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-06-13</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="常见名词以及分类"><a href="#常见名词以及分类" class="headerlink" title="常见名词以及分类"></a>常见名词以及分类</h2><p>分段错误(Segmentation error): </p>
+<p>​	<strong>访问空指针（NULL指针）</strong>：程序试图访问一个没有指向任何有效内存地址的指针。</p>
+<p>​	<strong>访问已经释放的内存</strong>：程序试图使用已经释放的内存区域。</p>
+<p>​	<strong>访问越界内存</strong>：程序试图访问数组或缓冲区之外的内存区域。</p>
+<p>​	<strong>错误的指针操作</strong>：例如，未正确初始化指针或错误地修改了指针的值。</p>
+<p>malloc和calloc区别</p>
+<pre><code>1. 传入参数
+ 2. malloc初始化用垃圾值填充而calloc用0填充
+</code></pre>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2024/06/13/%E6%95%B0%E6%8D%AE%E7%BB%93dog/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Docker学习路程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -632,136 +875,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2024/03/17/js%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%A8%8B/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-springboot-vue学习路程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2024/03/16/springboot-vue%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%A8%8B/">springboot+vue学习路程</a>
-    </h1>
-  
-
-        
-        <a href="/2024/03/16/springboot-vue%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%A8%8B/" class="archive-article-date">
-  	<time datetime="2024-03-16T13:06:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-03-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h6 id="2024-03-16-21-06-02"><a href="#2024-03-16-21-06-02" class="headerlink" title="2024-03-16 21:06:02"></a>2024-03-16 21:06:02</h6>
-        
-          <a class="article-more-a" href="/2024/03/16/springboot-vue%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%A8%8B/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2024/03/16/springboot-vue%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%A8%8B/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-html-学习路程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2024/03/15/html-%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%A8%8B/">html&amp;css 学习路程</a>
-    </h1>
-  
-
-        
-        <a href="/2024/03/15/html-%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%A8%8B/" class="archive-article-date">
-  	<time datetime="2024-03-15T12:16:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-03-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h6 id="2024-03-15-20-16-26"><a href="#2024-03-15-20-16-26" class="headerlink" title="2024-03-15 20:16:26"></a>2024-03-15 20:16:26</h6>
-        
-          <a class="article-more-a" href="/2024/03/15/html-%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%A8%8B/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2024/03/15/html-%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%A8%8B/">展开全文 >></a>
         </p>
       
 
