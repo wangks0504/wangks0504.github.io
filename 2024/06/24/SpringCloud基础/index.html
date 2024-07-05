@@ -23,8 +23,10 @@
 <meta property="og:image" content="https://img-blog.csdnimg.cn/direct/2bbe7aca905b4f72856f7efc9e48a89b.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/direct/dcbe7043c4b348dfa252ed53c9dc480f.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/direct/ea554c0ebb0b4580931aff6ec18a6d23.png">
+<meta property="og:image" content="https://wangks0504.github.io/2024/06/24/SpringCloud%E5%9F%BA%E7%A1%80/E:%5Cblog%5Csource%5C_posts%5CSpringCloud%E5%9F%BA%E7%A1%80%5Cimage-20240704140028322.png">
+<meta property="og:image" content="https://wangks0504.github.io/2024/06/24/SpringCloud%E5%9F%BA%E7%A1%80/E:%5Cblog%5Csource%5C_posts%5CSpringCloud%E5%9F%BA%E7%A1%80%5Cimage-20240704140149869.png">
 <meta property="article:published_time" content="2024-06-24T14:32:25.000Z">
-<meta property="article:modified_time" content="2024-07-03T18:16:10.200Z">
+<meta property="article:modified_time" content="2024-07-05T14:45:32.089Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://wangks0504.github.io/2024/06/24/SpringCloud%E5%9F%BA%E7%A1%80/E:%5Cblog%5Csource%5C_posts%5CSpringCloud%E5%9F%BA%E7%A1%80%5Cimage-20240626001709281.png">
@@ -390,10 +392,13 @@
 <li>进入从服务  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it mysql-slave mysql -u root -ppassword</span><br></pre></td></tr></table></figure>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure></li>
 </ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">- 连接到主mysql和规定复制用户消息</span><br><span class="line">	```java</span><br><span class="line">	CHANGE MASTER TO</span><br><span class="line">MASTER_HOST=&#x27;mysqlp1&#x27;,</span><br><span class="line">MASTER_USER=&#x27;repl&#x27;,</span><br><span class="line">MASTER_PASSWORD=&#x27;replpassword&#x27;,</span><br><span class="line">MASTER_LOG_FILE=&#x27;mysql-bin.000001&#x27;,</span><br><span class="line">MASTER_LOG_POS=154;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- 启动复制</span><br><span class="line">	```java</span><br><span class="line">	START SLAVE;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
 <ul>
-<li>记录复制状态  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SHOW SLAVE STATUS \G;</span><br></pre></td></tr></table></figure>
+<li>启动复制  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">START SLAVE;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- 记录复制状态</span><br><span class="line">	```java</span><br><span class="line">	SHOW SLAVE STATUS \G;</span><br></pre></td></tr></table></figure>
 <ul>
 <li><em><strong>如果输出中 Slave_IO_Running 和 Slave_SQL_Running 都是 Yes，说明主从复制配置成功</strong></em>。</li>
 </ul>
@@ -561,6 +566,175 @@
 </ul>
 </li>
 </ul>
+<h2 id="性能优化"><a href="#性能优化" class="headerlink" title="性能优化"></a>性能优化</h2><h3 id="Feign底层的客户端实现："><a href="#Feign底层的客户端实现：" class="headerlink" title="Feign底层的客户端实现："></a>Feign底层的客户端实现：</h3><ol>
+<li>底层客户端实现</li>
+</ol>
+<ul>
+<li><p><strong>URLConnection</strong>：默认实现，不支持连接池</p>
+</li>
+<li><p><strong>Apache HttpClient</strong>：支持连接池</p>
+</li>
+<li><p><strong>OKHttp</strong>：支持连接池</p>
+</li>
+<li><p>如何实现</p>
+<ol>
+<li><p>引入坐标文件</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--        httpclient请求组件--&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;io.github.openfeign&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;feign-httpclient&lt;/artifactId&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置连接参数</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">httpclient:</span></span><br><span class="line">  <span class="attr">enabled:</span> <span class="literal">true</span> <span class="comment"># 是否开启</span></span><br><span class="line">  <span class="attr">max-connections:</span> <span class="number">200</span> <span class="comment">#最大连接数</span></span><br><span class="line">  <span class="attr">max-connections-per-route:</span> <span class="number">50</span> <span class="comment"># 每个单节点最大连接数</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+</ul>
+<ol start="2">
+<li>日志级别不选full</li>
+</ol>
+<h2 id="Feign的最佳实现"><a href="#Feign的最佳实现" class="headerlink" title="Feign的最佳实现"></a>Feign的最佳实现</h2><ol>
+<li>方式一(不推荐):给消费者的FeignClient和提供者的controller定义统一接口</li>
+<li><img src="/2024/06/24/SpringCloud%E5%9F%BA%E7%A1%80/E:%5Cblog%5Csource%5C_posts%5CSpringCloud%E5%9F%BA%E7%A1%80%5Cimage-20240704140028322.png" alt="image-20240704140028322"></li>
+<li>方式二(): 将FeignClient抽取为独立模块,并且把接口有关的POJO,默认的Feign配置都放在这个模块中</li>
+<li><img src="/2024/06/24/SpringCloud%E5%9F%BA%E7%A1%80/E:%5Cblog%5Csource%5C_posts%5CSpringCloud%E5%9F%BA%E7%A1%80%5Cimage-20240704140149869.png" alt="image-20240704140149869"></li>
+</ol>
+<h2 id="Feign的最佳实现操作"><a href="#Feign的最佳实现操作" class="headerlink" title="Feign的最佳实现操作"></a>Feign的最佳实现操作</h2><h2 id="错误整理-1"><a href="#错误整理-1" class="headerlink" title="错误整理"></a>错误整理</h2><ol>
+<li><p>导入的包无法创建feign实例</p>
+<ol>
+<li><p>原因FetgnClient不在SpringbootApplication的扫描包范围内</p>
+<ol>
+<li><p>在EnableFeignClients中添加其他项目的包</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@EnableFeignClients(basePackages = &quot;org.AutoCheckIn&quot;,defaultConfiguration = feignDefaultConfig.class)</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><pre><code class="java">@EnableFeignClients(class=****.class,defaultConfiguration = feignDefaultConfig.class)
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"># GateWay网关</span><br><span class="line"></span><br><span class="line">## 配置启动</span><br><span class="line"></span><br><span class="line">1. 添加依赖</span><br><span class="line"></span><br><span class="line">   ```pom</span><br><span class="line">   &lt;!--     网关依赖--&gt;</span><br><span class="line">           &lt;dependency&gt;</span><br><span class="line">               &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;</span><br><span class="line">               &lt;artifactId&gt;spring-cloud-starter-gateway&lt;/artifactId&gt;</span><br><span class="line">           &lt;/dependency&gt;</span><br><span class="line">   &lt;!--        nacos服务发现--&gt;</span><br><span class="line">           &lt;dependency&gt;</span><br><span class="line">               &lt;groupId&gt;com.alibaba.cloud&lt;/groupId&gt;</span><br><span class="line">               &lt;artifactId&gt;spring-cloud-starter-alibaba-nacos-discovery&lt;/artifactId&gt;</span><br><span class="line">           &lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><p>配置yml</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">10010</span>  <span class="comment"># 配置服务器的端口号为 10010</span></span><br><span class="line"></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">application:</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">gataway</span>  <span class="comment"># 配置应用程序的名称为 gataway</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">cloud:</span></span><br><span class="line">    <span class="attr">nacos:</span></span><br><span class="line">      <span class="attr">server-addr:</span> <span class="string">localhost:80</span>  <span class="comment"># 配置 Nacos 服务器的地址为 localhost:80</span></span><br><span class="line">    <span class="attr">gateway:</span></span><br><span class="line">      <span class="attr">routes:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">id:</span> <span class="string">user-service</span>  <span class="comment"># 这是第一个路由的唯一标识符，命名为 user-service</span></span><br><span class="line">          <span class="attr">uri:</span> <span class="string">lb://userservice</span>  <span class="comment"># 配置目标服务的 URI，为 userservice，使用负载均衡（lb）方式</span></span><br><span class="line">          <span class="attr">predicates:</span></span><br><span class="line">            <span class="bullet">-</span> <span class="string">Path=/user/**</span>  <span class="comment"># 路由的匹配条件，匹配所有以 /user/ 开头的请求路径</span></span><br><span class="line"></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">id:</span> <span class="string">order-service</span>  <span class="comment"># 这是第二个路由的唯一标识符，命名为 order-service</span></span><br><span class="line">          <span class="attr">uri:</span> <span class="string">lb://order-service</span>  <span class="comment"># 配置目标服务的 URI，为 order-service，使用负载均衡（lb）方式</span></span><br><span class="line">          <span class="attr">predicates:</span></span><br><span class="line">            <span class="bullet">-</span> <span class="string">Path=/order/**</span>  <span class="comment"># 路由的匹配条件，匹配所有以 /order/ 开头的请求路径</span></span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="predicates断言工厂"><a href="#predicates断言工厂" class="headerlink" title="predicates断言工厂"></a>predicates断言工厂</h2><ol>
+<li><p>作用**读取配置中的断言字符串,并且转为过滤规则</p>
+</li>
+<li><p>断言工厂种类</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>说明</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>After</td>
+<td>是某个时间点后的请求</td>
+<td>- After&#x3D;2037-01-20T17:42:47.789-07:00[America&#x2F;Denver]</td>
+</tr>
+<tr>
+<td>Before</td>
+<td>是某个时间点之前的请求</td>
+<td>- Before&#x3D;2031-04-13T15:14:47.433+08:00[Asia&#x2F;Shanghai]</td>
+</tr>
+<tr>
+<td>Between</td>
+<td>是某两个时间点之间的请求</td>
+<td>- Between&#x3D;2037-01-20T17:42:47.789-07:00[America&#x2F;Denver], 2037-01-21T17:42:47.789-07:00[America&#x2F;Denver]</td>
+</tr>
+<tr>
+<td>Cookie</td>
+<td>请求必须包含某些cookie</td>
+<td>- Cookie&#x3D;chocolate, ch.p</td>
+</tr>
+<tr>
+<td>Header</td>
+<td>请求必须包含某些header</td>
+<td>- Header&#x3D;X-Request-Id, \d+</td>
+</tr>
+<tr>
+<td>Host</td>
+<td>请求必须是访问某个host（域名）</td>
+<td>- Host&#x3D;**.somehost.org, **.anotherhost.org</td>
+</tr>
+<tr>
+<td>Method</td>
+<td>请求方式必须是指定方式</td>
+<td>- Method&#x3D;GET,POST</td>
+</tr>
+<tr>
+<td>Path</td>
+<td>请求路径必须符合指定规则</td>
+<td>- Path&#x3D;&#x2F;red&#x2F;{segment},&#x2F;blue&#x2F;**</td>
+</tr>
+<tr>
+<td>Query</td>
+<td>请求参数必须包含指定参数</td>
+<td>- Query&#x3D;name, Jack或者- Query&#x3D;name</td>
+</tr>
+<tr>
+<td>RemoteAddr</td>
+<td>请求者的ip必须是指定范围</td>
+<td>- RemoteAddr&#x3D;192.168.1.1&#x2F;24</td>
+</tr>
+<tr>
+<td>Weight</td>
+<td>权重处理</td>
+<td></td>
+</tr>
+</tbody></table>
+<p>[SpringCloud predicate factory](<a target="_blank" rel="noopener" href="https://docs.spring.io/spring-cloud-gateway/docs/current/reference/html/#the-after-route-predicate-factory">Spring Cloud Gateway</a>)</p>
+</li>
+</ol>
+<h2 id="路由过滤器"><a href="#路由过滤器" class="headerlink" title="路由过滤器"></a>路由过滤器</h2><p>[Spring Cloud GatewayFilter Factories](<a target="_blank" rel="noopener" href="https://docs.spring.io/spring-cloud-gateway/docs/current/reference/html/#gatewayfilter-factories">Spring Cloud Gateway</a>)</p>
+<ol>
+<li><p>查阅文档更改yml配置文件</p>
+</li>
+<li><p>配置在单一服务只对单一服务生效</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">gateway:</span><br><span class="line">  routes:</span><br><span class="line">    - id: user-service</span><br><span class="line">      uri: lb:<span class="comment">//userservice</span></span><br><span class="line">      predicates:</span><br><span class="line">        - Path=/user<span class="comment">/**</span></span><br><span class="line"><span class="comment">      filters:</span></span><br><span class="line"><span class="comment">        - AddResponseHeader=Truth, Fucking</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>全局生效</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">default</span>-filters:</span><br><span class="line">	- **************</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="GlobalFilter全局过滤器-可自定义-比网关自带的过滤器更灵活"><a href="#GlobalFilter全局过滤器-可自定义-比网关自带的过滤器更灵活" class="headerlink" title="GlobalFilter全局过滤器(可自定义,比网关自带的过滤器更灵活)"></a>GlobalFilter全局过滤器(可自定义,比网关自带的过滤器更灵活)</h2><ol>
+<li><p>实现GlobalFilter接口(创建一个类)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AuthorizetFilter</span> <span class="keyword">implements</span> <span class="title class_">GlobalFilter</span>, Ordered &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Mono&lt;Void&gt; <span class="title function_">filter</span><span class="params">(ServerWebExchange exchange, GatewayFilterChain chain)</span> &#123;</span><br><span class="line"><span class="comment">//        获取请求参数</span></span><br><span class="line">        <span class="type">ServerHttpRequest</span> <span class="variable">request</span> <span class="operator">=</span> exchange.getRequest();</span><br><span class="line"><span class="comment">//        获取对话</span></span><br><span class="line">        MultiValueMap&lt;String, String&gt; queryParams = request.getQueryParams();</span><br><span class="line"><span class="comment">//        从对话中获取Authorization参数</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">authorization</span> <span class="operator">=</span> queryParams.getFirst(<span class="string">&quot;Authorization&quot;</span>);</span><br><span class="line"><span class="comment">//        获取</span></span><br><span class="line"><span class="comment">//        判断</span></span><br><span class="line">        <span class="keyword">if</span>(authorization.equals(<span class="string">&quot;admin&quot;</span>))&#123;</span><br><span class="line">            <span class="keyword">return</span> chain.filter(exchange);</span><br><span class="line">        &#125;</span><br><span class="line">        exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);</span><br><span class="line">        <span class="keyword">return</span> exchange.getResponse().setComplete();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getOrder</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="过滤器执行顺序"><a href="#过滤器执行顺序" class="headerlink" title="过滤器执行顺序"></a>过滤器执行顺序</h2><ol>
+<li><p>请求进入网关会碰到三类过滤器：当前路由的过滤器、DefaultFilter、GlobalFilter</p>
+<p>请求路由后，会将当前路由过滤器和DefaultFilter、GlobalFilter，合并到一个过滤器链（集合）中，排序后依次执行每个过滤器</p>
+<ul>
+<li><p>每一个过滤器都会有一个**@Order<strong>配置值越小越优先执行但是</strong>路由的过滤器和DefaultFilter<strong>的</strong>Order<strong>由Spring指定</strong><em>按照声明的顺序从1递增</em>**</p>
+<ul>
+<li><pre><code class="yml">      filters:
+         - AddRequestHeader=Truth, Fucking  order为1
+         - AddRequestHeader=Truth, Fucking  order为2
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- ```yml</span><br><span class="line">        default-filters:</span><br><span class="line">          - AddRequestHeader=Truth, Fucking  order为1</span><br><span class="line">          - AddRequestHeader=Truth, Fucking  order为2</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+</ul>
+</li>
+<li><p>特殊情况当过滤器的<strong>Order</strong>值都相同时执行顺序是</p>
+<p><strong>DefaultFilter</strong>—&gt;<strong>路由过滤器</strong>—&gt;<strong>GlobalFilter</strong></p>
+</li>
+</ul>
+</li>
+<li><p>原理刨析</p>
+<ul>
+<li><p>当前路由的过滤器和defaultFilter本质是一个东西都叫<strong>GateWayFilter</strong>都是通过<strong>AddRequestHeaderGatewayFilterFactory</strong>这个类来读取配置文件最后生成一个真正的路由器</p>
+<ul>
+<li>通过阅读<strong>RouterDefinitionRouteLocator.class</strong>中的<strong>getFilters</strong>函数可知道这两个的执行顺序是靠<strong>Order</strong>来绝定的</li>
+<li>通过阅读<strong>FilteringWebHandler.class</strong>中的<strong>handle</strong>函数可知到根据上面的<strong>getFilters</strong>首先获取路由过滤器和DefaultFilter的排序之后和<strong>GlobalFilter</strong>合并为<strong>GatewayFilter</strong>最后根据<strong>Order</strong>排序,组织过滤器链</li>
+</ul>
+</li>
+<li><p>在网关中所有的<strong>GlobalFilter</strong>都可以被适配成<strong>GatewayFilter</strong></p>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="网关的跨域问题解决"><a href="#网关的跨域问题解决" class="headerlink" title="网关的跨域问题解决"></a>网关的跨域问题解决</h2><h3 id="跨域问题是因为浏览器和ajax"><a href="#跨域问题是因为浏览器和ajax" class="headerlink" title="跨域问题是因为浏览器和ajax"></a>跨域问题是因为浏览器和ajax</h3><ol>
+<li><p>网关处理跨域只需要简单配置</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">spring:</span><br><span class="line">  cloud:</span><br><span class="line">    gateway:</span><br><span class="line">      globalcors: # 全局的跨域处理</span><br><span class="line">        add-to-simple-url-handler-mapping: <span class="literal">true</span> # 解决options请求被拦截问题</span><br><span class="line">        corsConfigurations:</span><br><span class="line">          <span class="string">&#x27;[/**]&#x27;</span>:</span><br><span class="line">            allowedOrigins: # 允许哪些网站的跨域请求</span><br><span class="line">              - <span class="string">&quot;http://localhost:8090&quot;</span></span><br><span class="line">              - <span class="string">&quot;http://www.leyou.com&quot;</span></span><br><span class="line">            allowedMethods: # 允许的跨域ajax的请求方式</span><br><span class="line">              - <span class="string">&quot;GET&quot;</span></span><br><span class="line">              - <span class="string">&quot;POST&quot;</span></span><br><span class="line">              - <span class="string">&quot;DELETE&quot;</span></span><br><span class="line">              - <span class="string">&quot;PUT&quot;</span></span><br><span class="line">              - <span class="string">&quot;OPTIONS&quot;</span></span><br><span class="line">            allowedHeaders: <span class="string">&quot;*&quot;</span> # 允许在请求中携带的头信息</span><br><span class="line">            allowCredentials: <span class="literal">true</span> # 是否允许携带cookie</span><br><span class="line">            maxAge: <span class="number">360000</span> # 这次跨域检测的有效期</span><br></pre></td></tr></table></figure></li>
+</ol>
 
       
 
