@@ -144,261 +144,6 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-正则表达式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2024/10/15/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">正则表达式</a>
-    </h1>
-  
-
-        
-        <a href="/2024/10/15/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" class="archive-article-date">
-  	<time datetime="2024-10-15T05:18:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-10-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <table>
-<thead>
-<tr>
-<th><strong>功能</strong></th>
-<th><strong>符号</strong></th>
-<th><strong>描述</strong></th>
-<th><strong>示例</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td><strong>任意字符</strong></td>
-<td><code>.</code></td>
-<td>匹配任意单个字符（除换行符外）</td>
-<td><code>a.c</code> 匹配 <code>abc</code>, <code>a1c</code></td>
-</tr>
-<tr>
-<td><strong>开始位置</strong></td>
-<td><code>^</code></td>
-<td>匹配字符串的开始</td>
-<td><code>^abc</code> 匹配以 <code>abc</code> 开头的字符串</td>
-</tr>
-<tr>
-<td><strong>结束位置</strong></td>
-<td><code>$</code></td>
-<td>匹配字符串的结束</td>
-<td><code>abc$</code> 匹配以 <code>abc</code> 结尾的字符串</td>
-</tr>
-<tr>
-<td><strong>任意数字</strong></td>
-<td><code>\d</code></td>
-<td>匹配任意数字，等价于 <code>[0-9]</code></td>
-<td><code>\d</code> 匹配 <code>1</code>, <code>9</code></td>
-</tr>
-<tr>
-<td><strong>非数字字符</strong></td>
-<td><code>\D</code></td>
-<td>匹配任意非数字字符，等价于 <code>[^0-9]</code></td>
-<td><code>\D</code> 匹配 <code>a</code>, <code>@</code></td>
-</tr>
-<tr>
-<td><strong>字母、数字或下划线</strong></td>
-<td><code>\w</code></td>
-<td>匹配字母、数字或下划线，等价于 <code>[A-Za-z0-9_]</code></td>
-<td><code>\w</code> 匹配 <code>a</code>, <code>1</code>, <code>_</code></td>
-</tr>
-<tr>
-<td><strong>非字母、数字或下划线</strong></td>
-<td><code>\W</code></td>
-<td>匹配非字母、数字或下划线字符，等价于 <code>[^A-Za-z0-9_]</code></td>
-<td><code>\W</code> 匹配 <code>@</code>, <code>!</code></td>
-</tr>
-<tr>
-<td><strong>空白字符</strong></td>
-<td><code>\s</code></td>
-<td>匹配空白字符，包括空格、制表符、换页符等</td>
-<td><code>\s</code> 匹配空格、<code>\t</code></td>
-</tr>
-<tr>
-<td><strong>非空白字符</strong></td>
-<td><code>\S</code></td>
-<td>匹配非空白字符</td>
-<td><code>\S</code> 匹配 <code>a</code>, <code>1</code></td>
-</tr>
-<tr>
-<td><strong>零次或多次匹配</strong></td>
-<td><code>*</code></td>
-<td>匹配前面的字符零次或多次</td>
-<td><code>a*</code> 匹配 <code>a</code>, <code>aaa</code></td>
-</tr>
-<tr>
-<td><strong>一次或多次匹配</strong></td>
-<td><code>+</code></td>
-<td>匹配前面的字符一次或多次</td>
-<td><code>a+</code> 匹配 <code>a</code>, <code>aaa</code></td>
-</tr>
-<tr>
-<td><strong>零次或一次匹配</strong></td>
-<td><code>?</code></td>
-<td>匹配前面的字符零次或一次</td>
-<td><code>a?</code> 匹配 <code>a</code>, 或没有 <code>a</code></td>
-</tr>
-<tr>
-<td><strong>指定匹配次数</strong></td>
-<td><code>&#123;n&#125;</code></td>
-<td>精确匹配前面的字符 <code>n</code> 次</td>
-<td><code>a&#123;3&#125;</code> 匹配 <code>aaa</code></td>
-</tr>
-<tr>
-<td><strong>至少匹配 n 次</strong></td>
-<td><code>&#123;n,&#125;</code></td>
-<td>匹配前面的字符至少 <code>n</code> 次</td>
-<td><code>a&#123;2,&#125;</code> 匹配 <code>aa</code>, <code>aaa</code></td>
-</tr>
-<tr>
-<td><strong>匹配范围</strong></td>
-<td><code>[ ]</code></td>
-<td>匹配方括号中的任意一个字符</td>
-<td><code>[abc]</code> 匹配 <code>a</code>, <code>b</code>, <code>c</code></td>
-</tr>
-<tr>
-<td><strong>不匹配范围</strong></td>
-<td><code>[^ ]</code></td>
-<td>匹配不在方括号中的任意一个字符</td>
-<td><code>[^abc]</code> 匹配除 <code>a</code>, <code>b</code>, <code>c</code> 以外的字符</td>
-</tr>
-<tr>
-<td><strong>分组</strong></td>
-<td><code>( )</code></td>
-<td>将表达式中的子表达式分组</td>
-<td><code>(abc)</code> 匹配 <code>abc</code></td>
-</tr>
-<tr>
-<td><strong>或</strong></td>
-<td>&#96;</td>
-<td>&#96;</td>
-<td>匹配左边或右边的表达式</td>
-</tr>
-<tr>
-<td><strong>转义字符</strong></td>
-<td><code>\</code></td>
-<td>转义字符，使其后的字符失去特殊含义，匹配其字面意义</td>
-<td><code>\.</code> 匹配 <code>.</code></td>
-</tr>
-</tbody></table>
-<ol start="2">
-<li><p>分组</p>
-<table>
-<thead>
-<tr>
-<th><strong>功能</strong></th>
-<th><strong>语法</strong></th>
-<th><strong>描述</strong></th>
-<th><strong>示例</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td><strong>捕获分组</strong></td>
-<td><code>(pattern)</code></td>
-<td>将括号内的部分作为一个子表达式进行捕获。可以通过编号或名称引用。</td>
-<td><code>(ab)+</code> 匹配 <code>ab</code>、<code>abab</code> 等</td>
-</tr>
-<tr>
-<td><strong>非捕获分组</strong></td>
-<td><code>(?:pattern)</code></td>
-<td>匹配括号内的模式，但不捕获匹配的内容，不进行编号。</td>
-<td><code>(?:ab)+</code> 匹配 <code>ab</code>、<code>abab</code> 等</td>
-</tr>
-<tr>
-<td><strong>编号引用分组</strong></td>
-<td><code>\n</code></td>
-<td>引用前面的捕获分组，n 为分组的编号（从1开始）。</td>
-<td><code>(\w)\1</code> 匹配两个连续相同的字母</td>
-</tr>
-<tr>
-<td><strong>命名捕获分组</strong></td>
-<td><code>(?&lt;name&gt;pattern)</code></td>
-<td>将括号内的部分作为命名捕获组，可以通过名称引用。</td>
-<td><code>(?&lt;year&gt;\d&#123;4&#125;)</code> 匹配四位数字作为年份</td>
-</tr>
-<tr>
-<td><strong>零宽断言分组</strong></td>
-<td><code>(?=pattern)</code></td>
-<td>正向预查，在匹配 pattern 后的位置，不消耗字符。</td>
-<td><code>x(?=y)</code> 匹配 <code>x</code> 后面跟着 <code>y</code></td>
-</tr>
-<tr>
-<td></td>
-<td><code>(?!pattern)</code></td>
-<td>负向预查，在不匹配 pattern 后的位置，不消耗字符。</td>
-<td><code>x(?!y)</code> 匹配 <code>x</code> 后面不跟着 <code>y</code></td>
-</tr>
-<tr>
-<td><strong>零宽断言捕获分组</strong></td>
-<td><code>(?&lt;=pattern)</code></td>
-<td>正向后行断言，在匹配 pattern 前的位置，不消耗字符。</td>
-<td><code>(?&lt;=y)x</code> 匹配 <code>x</code> 前面跟着 <code>y</code></td>
-</tr>
-<tr>
-<td></td>
-<td><code>(?&lt;!pattern)</code></td>
-<td>负向后行断言，在不匹配 pattern 前的位置，不消耗字符。</td>
-<td><code>(?&lt;!y)x</code> 匹配 <code>x</code> 前面不跟着 <code>y</code></td>
-</tr>
-</tbody></table>
-</li>
-</ol>
-<h1 id="爬虫"><a href="#爬虫" class="headerlink" title="爬虫"></a>爬虫</h1><ol>
-<li><p>re模块使用(实例)</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 导入re正则表达式模块</span></span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="comment"># 导入csv文件模块</span></span><br><span class="line"><span class="comment"># write = csv.write(文件)</span></span><br><span class="line"><span class="comment"># write.writerow(数据)</span></span><br><span class="line"><span class="keyword">import</span> csv</span><br><span class="line"><span class="comment"># 导入请求模块</span></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">url = <span class="string">&quot;https://www.dytt89.com&quot;</span></span><br><span class="line"><span class="comment"># 发送请求</span></span><br><span class="line">resp = requests.get(url,proxies=&#123;<span class="string">&quot;http&quot;</span>: <span class="literal">None</span>,<span class="string">&quot;https&quot;</span>: <span class="literal">None</span>&#125;)</span><br><span class="line"><span class="comment"># 对响应体的编码</span></span><br><span class="line">resp.encoding= <span class="string">&#x27;gb2312&#x27;</span></span><br><span class="line"><span class="comment"># 预定义正则表达式语法</span></span><br><span class="line">obj = re.<span class="built_in">compile</span>(<span class="string">r&#x27;2024必看热片.*?&lt;ul&gt;(?P&lt;ul&gt;.*?)&lt;/ul&gt;&#x27;</span>,re.S)</span><br><span class="line">obj2 = re.<span class="built_in">compile</span>(<span class="string">r&quot;&lt;a href=&#x27;(?P&lt;href&gt;.*?)&#x27; title=\&quot;(?P&lt;name&gt;.*?)\&quot;&gt;&quot;</span>,re.S)</span><br><span class="line">obj3 = re.<span class="built_in">compile</span>(<span class="string">r&#x27;&lt;title&gt;(?P&lt;name&gt;.*?)&lt;/title&gt;.*?&#x27;</span></span><br><span class="line">                  <span class="string">r&#x27;&lt;td style=&quot;WORD-WRAP: break-word&quot; bgcolor=&quot;#fdfddf&quot;&gt;&lt;a href=&quot;(?P&lt;magnet&gt;.*?)&quot;&gt;&#x27;</span>,re.S)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义请求头</span></span><br><span class="line">headers=&#123;</span><br><span class="line"><span class="string">&quot;user-agent&quot;</span>:<span class="string">&quot;Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Mobile Safari/537.36 Edg/129.0.0.0&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">#执行正则表达式 返回迭代器</span></span><br><span class="line">result = obj.finditer(resp.text)</span><br><span class="line">cinemaUrlList =[]</span><br><span class="line">cinemaAllList = []</span><br><span class="line"><span class="comment"># 读取迭代器内容</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> result:</span><br><span class="line">    <span class="comment"># 返回分组</span></span><br><span class="line">    ul = i.group(<span class="string">&#x27;ul&#x27;</span>)</span><br><span class="line">    <span class="comment"># print(ul)</span></span><br><span class="line">    <span class="comment"># 对分组继续正则</span></span><br><span class="line">    result2 = obj2.finditer(ul)</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> result2:</span><br><span class="line">        cinemaUrl = url + j.group(<span class="string">&#x27;href&#x27;</span>)</span><br><span class="line">        cinemaName = j.group(<span class="string">&#x27;name&#x27;</span>)</span><br><span class="line">        cinemaUrlList.append(cinemaUrl)</span><br><span class="line">        <span class="built_in">print</span>(url+j.group(<span class="string">&#x27;href&#x27;</span>),j.group(<span class="string">&#x27;name&#x27;</span>))</span><br><span class="line"><span class="comment">#         对内容重定向来获取最终内容</span></span><br><span class="line"><span class="keyword">for</span> href <span class="keyword">in</span> cinemaUrlList:</span><br><span class="line">    <span class="comment"># 发送请求</span></span><br><span class="line">    resp3 = requests.get(href,headers=headers,proxies=&#123;<span class="string">&quot;http&quot;</span>: <span class="literal">None</span>,<span class="string">&quot;https&quot;</span>: <span class="literal">None</span>&#125;)</span><br><span class="line">    resp3.encoding = <span class="string">&#x27;gb2312&#x27;</span></span><br><span class="line">    result3 = obj3.finditer(resp3.text)</span><br><span class="line">    <span class="keyword">for</span> res3 <span class="keyword">in</span> result3:</span><br><span class="line">        cinemaAllList.append(res3.group(<span class="string">&#x27;name&#x27;</span>)+<span class="string">&quot;,&quot;</span>+res3.group(<span class="string">&#x27;magnet&#x27;</span>))</span><br><span class="line">        <span class="built_in">print</span>(res3.group(<span class="string">&#x27;name&#x27;</span>),res3.group(<span class="string">&#x27;magnet&#x27;</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 把读取到的内容输出为文件</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;ciname.txt&quot;</span>,mode=<span class="string">&quot;w&quot;</span> ,encoding=<span class="string">&quot;utf-8&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> cinemaAllList:</span><br><span class="line">        f.write(item + <span class="string">&quot;\n&quot;</span>)</span><br><span class="line">resp.close()</span><br><span class="line">resp3.close()</span><br><span class="line">f.close()</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>bs4(实例)</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="comment"># 时间模块</span></span><br><span class="line"><span class="keyword">import</span>  time</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</span><br><span class="line"><span class="comment"># 请求地址</span></span><br><span class="line">headUrl = <span class="string">&quot;https://www.umei.cc/meinvtupian/&quot;</span></span><br><span class="line"><span class="comment"># 发送get请求</span></span><br><span class="line">resp = requests.get(headUrl)</span><br><span class="line"><span class="comment"># 避免乱码</span></span><br><span class="line">resp.encoding = <span class="string">&quot;utf-8&quot;</span></span><br><span class="line"><span class="comment"># 使用bs4来解析</span></span><br><span class="line">headSoup = BeautifulSoup(resp.text,<span class="string">&quot;html.parser&quot;</span>)</span><br><span class="line"><span class="comment"># 正式解析内容</span></span><br><span class="line">picList = headSoup.find(<span class="string">&quot;div&quot;</span>, attrs=&#123;<span class="string">&quot;class&quot;</span>, <span class="string">&quot;taotu-main&quot;</span>&#125;).find_all(<span class="string">&#x27;a&#x27;</span>)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> picList:</span><br><span class="line">    <span class="comment"># 从解析出的内容中提取最终结果</span></span><br><span class="line">    href = i.get(<span class="string">&#x27;href&#x27;</span>)</span><br><span class="line">    picPageUrl = <span class="string">&quot;https://wap.umei.cc&quot;</span>+href</span><br><span class="line">    <span class="comment"># print(picUrl)</span></span><br><span class="line">    <span class="comment"># 重定向二次访问</span></span><br><span class="line">    resp2 = requests.get(picPageUrl)</span><br><span class="line">    <span class="comment"># 继续应用bs4</span></span><br><span class="line">    PicPage = BeautifulSoup(resp2.text, <span class="string">&quot;html.parser&quot;</span>)</span><br><span class="line">    <span class="comment"># 根据html的标签来解析内容</span></span><br><span class="line">    PicPageA = PicPage.find(<span class="string">&quot;li&quot;</span>, attrs=&#123;<span class="string">&quot;class&quot;</span>, <span class="string">&quot;tal&quot;</span>&#125;).find(<span class="string">&quot;img&quot;</span>)</span><br><span class="line">    <span class="comment"># 获取src中的内容</span></span><br><span class="line">    PicUrl = PicPageA.get(<span class="string">&quot;src&quot;</span>)</span><br><span class="line">    <span class="comment"># 继续请求获取图片</span></span><br><span class="line">    picture = requests.get(PicUrl)</span><br><span class="line"></span><br><span class="line">    img_name = PicUrl.split(<span class="string">&quot;/&quot;</span>)[-<span class="number">1</span>]</span><br><span class="line">    <span class="built_in">print</span>(img_name)</span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;img/&quot;</span>+img_name,mode=<span class="string">&quot;wb&quot;</span>)<span class="keyword">as</span> f:</span><br><span class="line">        f.write(picture.content)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;第&quot;</span>+href+<span class="string">&quot;输出完成&quot;</span>)</span><br><span class="line">    f.close()</span><br><span class="line">    time.sleep(<span class="number">1</span>)</span><br></pre></td></tr></table></figure></li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2024/10/15/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-ZhiRanToolBox设计文档" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -419,84 +164,10 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="全局尺寸"><a href="#全局尺寸" class="headerlink" title="全局尺寸"></a>全局尺寸</h1><ol>
-<li>从上到下为 <strong>44</strong> <strong>44</strong> <strong>49</strong> <strong>34</strong></li>
-<li>文本字号为<strong>10</strong></li>
-<li>图标尺寸<strong>24*24</strong></li>
-</ol>
-<h1 id="组件库"><a href="#组件库" class="headerlink" title="组件库"></a>组件库</h1><ol>
-<li>ios15 ui kit for figma</li>
-<li>iconamoon 1.1 </li>
-<li><img src="/2024/09/30/ZhiRanToolBox%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3/E:%5Cblog%5Csource%5C_posts%5CZhiRanToolBox%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3%5Cimage-20241001003455875.png" alt="image-20241001003455875"></li>
-<li><img src="/2024/09/30/ZhiRanToolBox%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3/E:%5Cblog%5Csource%5C_posts%5CZhiRanToolBox%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3%5Cimage-20241001003523257.png" alt="image-20241001003523257"></li>
-</ol>
-<h1 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h1><ol>
-<li>尽量用模板组件进行设计方便后续修改</li>
-<li>使用同一个组件库</li>
-<li>使用模板颜色</li>
-<li>尽量高可用化(方便后续修改)</li>
-</ol>
-<h1 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h1><h2 id="主界面"><a href="#主界面" class="headerlink" title="主界面"></a>主界面</h2><ul>
-<li>登录界面<ul>
-<li>识别用户手机号登录&#x2F;注册</li>
-<li>用户自行注册</li>
-<li>手机验证码登录&#x2F;注册</li>
-</ul>
-</li>
-</ul>
-<h2 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h2><h3 id="AI接口"><a href="#AI接口" class="headerlink" title="AI接口"></a>AI接口</h3><ul>
-<li><p>首界面(需要账户登录使用 如果登录则不显示这个界面)</p>
-</li>
-<li><p>AI问答界面</p>
-<ol>
-<li>通过长按状态栏选择不同AI接口</li>
-<li>具有设置界面可以设置回答问题的字体等</li>
-</ol>
-</li>
-</ul>
-<h3 id="课程表组件"><a href="#课程表组件" class="headerlink" title="课程表组件"></a>课程表组件</h3><ul>
-<li><p>首届面</p>
-<ol>
-<li>需要登录学校信息网站的账户</li>
-<li>登陆后不在显示这个页面</li>
-<li>没登陆在第一次显示这个页面 用户可选下次是否显示</li>
-</ol>
-</li>
-<li><p>课程表界面</p>
-<ol>
-<li>用户可设置不同课程的不同参数</li>
-<li>编辑模式方便批量添加课程</li>
-</ol>
-</li>
-</ul>
-<h3 id="全部组件接口"><a href="#全部组件接口" class="headerlink" title="全部组件接口"></a>全部组件接口</h3><ul>
-<li><p>拼车</p>
-</li>
-<li><p>扫一扫</p>
-</li>
-<li><p>其他功能待定</p>
-</li>
-</ul>
-<h3 id="帖子组件"><a href="#帖子组件" class="headerlink" title="帖子组件"></a>帖子组件</h3><ul>
-<li>首界面(需要账户登录使用 如果登录则不显示这个界面)</li>
-<li>帖子界面<br> 1. 求助<br> - 求助界面<br>   1. 主界面可以浏览本校已经发布的帖子<br>  2. 买卖(二手平台)<br><br>- 买卖界面<br>  1. 主界面可以浏览本校已经发布的二手物品<br>  2. 底部可以发布闲置物品</li>
-</ul>
-<h3 id="个人中心-显示两个账号一个是本地账号-一个是学校信息网站的账号"><a href="#个人中心-显示两个账号一个是本地账号-一个是学校信息网站的账号" class="headerlink" title="个人中心(显示两个账号一个是本地账号 一个是学校信息网站的账号)"></a>个人中心(显示两个账号一个是本地账号 一个是学校信息网站的账号)</h3><ul>
-<li>AI接口余额(这个余额数字可以直接看到但是充值需要点进去)<ul>
-<li>主界面<ol>
-<li>余额查询</li>
-<li>余额充值</li>
-</ol>
-</li>
-</ul>
-</li>
-<li>账户设置(可以对本地账号进行操作,或者更换学校信息网站的账号)<ul>
-<li>主界面</li>
-</ul>
-</li>
-<li>其他待定</li>
-</ul>
-
+        <h6 id="2024-09-30-01-01-36"><a href="#2024-09-30-01-01-36" class="headerlink" title="2024-09-30 01:01:36"></a>2024-09-30 01:01:36</h6>
+        
+          <a class="article-more-a" href="/2024/09/30/ZhiRanToolBox%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3/#more">more >></a>
+        
       
 
       
@@ -1043,6 +714,71 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2024/05/16/%E9%AB%98%E6%95%B0/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-一些常见工具类的使用方法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2024/04/03/%E4%B8%80%E4%BA%9B%E5%B8%B8%E8%A7%81%E5%B7%A5%E5%85%B7%E7%B1%BB%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/">一些常见工具类的使用方法</a>
+    </h1>
+  
+
+        
+        <a href="/2024/04/03/%E4%B8%80%E4%BA%9B%E5%B8%B8%E8%A7%81%E5%B7%A5%E5%85%B7%E7%B1%BB%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/" class="archive-article-date">
+  	<time datetime="2024-04-03T09:23:15.020Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-04-03</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h6 id="2024-03-16-21-06-02"><a href="#2024-03-16-21-06-02" class="headerlink" title="2024-03-16 21:06:02"></a>2024-03-16 21:06:02</h6>
+        
+          <a class="article-more-a" href="/2024/04/03/%E4%B8%80%E4%BA%9B%E5%B8%B8%E8%A7%81%E5%B7%A5%E5%85%B7%E7%B1%BB%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2024/04/03/%E4%B8%80%E4%BA%9B%E5%B8%B8%E8%A7%81%E5%B7%A5%E5%85%B7%E7%B1%BB%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/">展开全文 >></a>
         </p>
       
 
