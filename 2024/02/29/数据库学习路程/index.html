@@ -16,7 +16,7 @@
 <meta property="og:description" content="2024-02-29 11:04:48">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-02-29T03:04:48.758Z">
-<meta property="article:modified_time" content="2024-06-02T10:43:17.547Z">
+<meta property="article:modified_time" content="2024-09-28T08:05:42.254Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -168,8 +168,7 @@
       
         <h6 id="2024-02-29-11-04-48"><a href="#2024-02-29-11-04-48" class="headerlink" title="2024-02-29 11:04:48"></a>2024-02-29 11:04:48</h6><span id="more"></span>
 
-<p><em>第一天</em><br>** DDL**</p>
-<hr>
+<h1 id="基础语法"><a href="#基础语法" class="headerlink" title="基础语法"></a>基础语法</h1><h2 id="DDL"><a href="#DDL" class="headerlink" title="DDL"></a>DDL</h2><hr>
 <ol>
 <li><p>查询所有数据库  </p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show databases </span><br></pre></td></tr></table></figure>
@@ -215,7 +214,7 @@
 <ol start="11">
 <li>DDL 表创建    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">create table tb_name(  </span><br><span class="line">-&gt; id int comment &#x27;binahao&#x27;,  </span><br><span class="line">-&gt; name varchar(50) comment   &#x27;mingzi&#x27;,  </span><br><span class="line">-&gt; age int comment &#x27;nianling&#x27;,  </span><br><span class="line">-&gt; gender varchar(1) comment    &#x27;xingbie&#x27;  </span><br><span class="line">-&gt; ) comment &#x27;yonghubiao&#x27;;  </span><br></pre></td></tr></table></figure></li>
 </ol>
-<h2 id="第二天"><a href="#第二天" class="headerlink" title="第二天"></a>第二天</h2><p><strong>DDL</strong></p>
+<p><strong>DDL</strong></p>
 <ol>
 <li>添加字段  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter table 表名 add 类型(长度)[comment 注释] [约束]</span><br></pre></td></tr></table></figure>
 <hr>
@@ -235,9 +234,9 @@
 <li>删除表 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">drop table [if exists] 表名</span><br></pre></td></tr></table></figure>
 <hr>
 </li>
-<li>删除表并且重新创建表<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">truncate table 表名</span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="第三天"><a href="#第三天" class="headerlink" title="第三天"></a>第三天</h2><strong>DML</strong></li>
+<li>删除表并且重新创建表<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">truncate table 表名</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="DML"><a href="#DML" class="headerlink" title="DML"></a>DML</h2><ol>
 <li>添加数据<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- insert into 表名 (字段1) values(&#x27;字段1&#x27;)  </span><br><span class="line">- insert into 表名 values(&#x27;值1&#x27; ,&#x27;值 2&#x27;)</span><br></pre></td></tr></table></figure>
 <hr>
 </li>
@@ -246,8 +245,7 @@
 </li>
 <li>删除数据 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">delete from 表名 where 条件<span class="number">1</span> and 条件<span class="number">2</span></span><br></pre></td></tr></table></figure></li>
 </ol>
-<p><strong>DQL</strong></p>
-<ol>
+<h2 id="DQL"><a href="#DQL" class="headerlink" title="DQL"></a>DQL</h2><ol>
 <li>语法<ul>
 <li>select 字段列表</li>
 <li>from   表名列表</li>
@@ -269,7 +267,580 @@
 <ul>
 <li>select distinct 字段列表 form 表名</li>
 </ul>
-<h3 id="MAY-BE-高级语法"><a href="#MAY-BE-高级语法" class="headerlink" title="MAY_BE 高级语法"></a>MAY_BE 高级语法</h3><ul>
+<h2 id="合计-统计函数"><a href="#合计-统计函数" class="headerlink" title="合计&#x2F;统计函数"></a>合计&#x2F;统计函数</h2><ol>
+<li><p>字符串函数</p>
+<ul>
+<li><table>
+<thead>
+<tr>
+<th>函数</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>CONCAT(S1, S2, … Sn)</td>
+<td>字符串拼接，将S1, S2, … Sn拼接成一个字符串</td>
+</tr>
+<tr>
+<td>LOWER(str)</td>
+<td>将字符串str全部转为小写</td>
+</tr>
+<tr>
+<td>UPPER(str)</td>
+<td>将字符串str全部转为大写</td>
+</tr>
+<tr>
+<td>LPAD(str, n, pad)</td>
+<td>左填充，用字符串pad对str的左边进行填充，达到n个字符串长度<strong>延长正顺序延长</strong></td>
+</tr>
+<tr>
+<td>RPAD(str, n, pad)</td>
+<td>右填充，用字符串pad对str的右边进行填充，达到n个字符串长度<strong>延长是正顺序延长</strong></td>
+</tr>
+<tr>
+<td>TRIM(str)</td>
+<td>去掉字符串头部和尾部的空格</td>
+</tr>
+<tr>
+<td>SUBSTRING(str, start, len)</td>
+<td>返回从字符串str从start位置起的len个长度的字符串<strong>索引从1开始</strong></td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+</li>
+<li><p>数值函数</p>
+<ul>
+<li><table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ABS(x)</td>
+<td>Returns the absolute value of <code>x</code></td>
+</tr>
+<tr>
+<td>CEIL(x)</td>
+<td>Rounds <code>x</code> up to the nearest integer</td>
+</tr>
+<tr>
+<td>FLOOR(x)</td>
+<td>Rounds <code>x</code> down to the nearest integer</td>
+</tr>
+<tr>
+<td>ROUND(x, d)</td>
+<td>Rounds <code>x</code> to <code>d</code> decimal places</td>
+</tr>
+<tr>
+<td>RAND()</td>
+<td>Returns a random floating-point value between 0 and 1</td>
+</tr>
+<tr>
+<td>SQRT(x)</td>
+<td>Returns the square root of <code>x</code></td>
+</tr>
+<tr>
+<td>POW(x, y) &#x2F; POWER(x, y)</td>
+<td>Returns <code>x</code> raised to the power of <code>y</code></td>
+</tr>
+<tr>
+<td>MOD(x, y)</td>
+<td>Returns the remainder of <code>x</code> divided by <code>y</code></td>
+</tr>
+<tr>
+<td>GREATEST(x1, x2, … xn)</td>
+<td>Returns the largest value among the arguments</td>
+</tr>
+<tr>
+<td>LEAST(x1, x2, … xn)</td>
+<td>Returns the smallest value among the arguments</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+</li>
+<li><p>日期函数</p>
+<ul>
+<li><table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>NOW()</td>
+<td>Returns the current date and time</td>
+</tr>
+<tr>
+<td>CURDATE()</td>
+<td>Returns the current date (YYYY-MM-DD)</td>
+</tr>
+<tr>
+<td>CURTIME()</td>
+<td>Returns the current time (HH:MM:SS)</td>
+</tr>
+<tr>
+<td>DATE_ADD(date, INTERVAL expr unit)</td>
+<td>Adds a time interval to a date and returns the result</td>
+</tr>
+<tr>
+<td>DATE_SUB(date, INTERVAL expr unit)</td>
+<td>Subtracts a time interval from a date and returns the result</td>
+</tr>
+<tr>
+<td>DATEDIFF(date1, date2)</td>
+<td>Returns the number of days between <code>date1</code> and <code>date2</code></td>
+</tr>
+<tr>
+<td>DATE_FORMAT(date, format)</td>
+<td>Formats a date according to the specified format</td>
+</tr>
+<tr>
+<td>DAY(date)</td>
+<td>Returns the day of the month from a date (1-31)</td>
+</tr>
+<tr>
+<td>MONTH(date)</td>
+<td>Returns the month from a date (1-12)</td>
+</tr>
+<tr>
+<td>YEAR(date)</td>
+<td>Returns the year from a date</td>
+</tr>
+<tr>
+<td>DAYOFWEEK(date)</td>
+<td>Returns the weekday index (1 &#x3D; Sunday, 2 &#x3D; Monday, etc.)</td>
+</tr>
+<tr>
+<td>WEEK(date)</td>
+<td>Returns the week number of the year</td>
+</tr>
+<tr>
+<td>LAST_DAY(date)</td>
+<td>Returns the last day of the month for the given date</td>
+</tr>
+<tr>
+<td>STR_TO_DATE(str, format)</td>
+<td>Parses a string according to a specified format and returns a date</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>以下是常用的 <code>%</code> 格式符号及其含义：</p>
+<ul>
+<li><code>%Y</code>：四位年份（如 2024）</li>
+<li><code>%y</code>：两位年份（如 24）</li>
+<li><code>%m</code>：月份（01 到 12）</li>
+<li><code>%c</code>：月份（1 到 12，不补零）</li>
+<li><code>%b</code>：月份缩写（如 Jan, Feb）</li>
+<li><code>%M</code>：月份全名（如 January, February）</li>
+<li><code>%d</code>：日（01 到 31）</li>
+<li><code>%e</code>：日（1 到 31，不补零）</li>
+<li><code>%H</code>：小时（00 到 23）</li>
+<li><code>%h</code> 或 <code>%I</code>：小时（01 到 12）</li>
+<li><code>%i</code>：分钟（00 到 59）</li>
+<li><code>%s</code>：秒（00 到 59）</li>
+<li><code>%p</code>：AM 或 PM</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>流程控制函数</p>
+<ul>
+<li><table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>IF(condition, true_value, false_value)</code></td>
+<td>Returns <code>true_value</code> if the condition is true; otherwise returns <code>false_value</code>.</td>
+</tr>
+<tr>
+<td><code>CASE</code></td>
+<td>Allows for conditional logic with multiple conditions.</td>
+</tr>
+<tr>
+<td><code>COALESCE(value1, value2, ..., valueN)</code></td>
+<td>Returns the first non-NULL value among the arguments.</td>
+</tr>
+<tr>
+<td><code>NULLIF(value1, value2)</code></td>
+<td>Returns NULL if <code>value1</code> equals <code>value2</code>; otherwise returns <code>value1</code>.</td>
+</tr>
+<tr>
+<td><code>LEAST(value1, value2, ..., valueN)</code></td>
+<td>Returns the smallest value among the arguments.</td>
+</tr>
+<tr>
+<td><code>GREATEST(value1, value2, ..., valueN)</code></td>
+<td>Returns the largest value among the arguments.</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="约束"><a href="#约束" class="headerlink" title="约束"></a>约束</h2><ol>
+<li><p>外键约束</p>
+<ul>
+<li><pre><code class="java">ALTER TABLE Orders
+    ## 选择 子表
+ADD CONSTRAINT fk_customer
+    ## 定义 外键名称
+FOREIGN KEY (CustomerID)
+    ## 定义 外键
+REFERENCES Customers(CustomerID)
+    ## 定义关联数据库中的字段
+    ## 可选自定义外键地删除更新操作
+</code></pre>
+</li>
+</ul>
+</li>
+</ol>
+<p>on update cascade;<br>     <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 删除外键</span><br><span class="line"></span><br><span class="line">  ```java</span><br><span class="line"> alert table Orders drop forgein key fk_customer</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li><p>外键约束的删除和更新行为</p>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>行为</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ON DELETE CASCADE</td>
+<td>级联删除</td>
+<td>删除父表中的记录时，自动删除所有引用该记录的子表记录。</td>
+</tr>
+<tr>
+<td>ON DELETE SET NULL</td>
+<td>设置为空</td>
+<td>删除父表中的记录时，将子表中相应的外键值设置为NULL。</td>
+</tr>
+<tr>
+<td>ON DELETE RESTRICT</td>
+<td>限制删除</td>
+<td>如果存在引用该记录的子表记录，则不允许删除父表中的记录。</td>
+</tr>
+<tr>
+<td>ON DELETE NO ACTION</td>
+<td>不采取任何行动</td>
+<td>同限制删除，但在某些数据库中被视为默认行为。</td>
+</tr>
+<tr>
+<td>ON UPDATE CASCADE</td>
+<td>级联更新</td>
+<td>更新父表中的记录时，自动更新所有引用该记录的子表外键值。</td>
+</tr>
+<tr>
+<td>ON UPDATE SET NULL</td>
+<td>设置为空</td>
+<td>更新父表中的记录时，将子表中相应的外键值设置为NULL。</td>
+</tr>
+<tr>
+<td>ON UPDATE RESTRICT</td>
+<td>限制更新</td>
+<td>如果存在引用该记录的子表记录，则不允许更新父表中的记录。</td>
+</tr>
+<tr>
+<td>ON UPDATE NO ACTION</td>
+<td>不采取任何行动</td>
+<td>同限制更新，但在某些数据库中被视为默认行为。</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<h2 id="多表查询"><a href="#多表查询" class="headerlink" title="多表查询"></a>多表查询</h2><h3 id="内连接-比较固定"><a href="#内连接-比较固定" class="headerlink" title="内连接(比较固定)"></a>内连接(比较固定)</h3><ol>
+<li><p>隐式内连接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select *</span><br><span class="line">from studentcourses,students,courses where studentcourses.StudentID = students.StudentID &amp;&amp; studentcourses.CourseID = courses.CourseID;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>显式内连接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SELECT s.StudentName, c.CourseName</span><br><span class="line">FROM StudentCourses sc</span><br><span class="line">JOIN Students s ON sc.StudentID = s.StudentID</span><br><span class="line">JOIN Courses c ON sc.CourseID = c.CourseID;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="外连接-比较自由"><a href="#外连接-比较自由" class="headerlink" title="外连接(比较自由)"></a>外连接(比较自由)</h3><ol>
+<li><p>左外连接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select s.StudentName,c.CourseName  from studentcourses sc left join students s  on sc.StudentID = s.StudentID left join  courses c on</span><br><span class="line">     sc.CourseID = c.CourseID;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>右外连接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select s.StudentName,c.CourseName  from studentcourses sc right join students s  on sc.StudentID = s.StudentID right join  courses c on</span><br><span class="line">     sc.CourseID = c.CourseID;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="自连接-自己连接自己-可以是内连接查询-也可以是外连接查询"><a href="#自连接-自己连接自己-可以是内连接查询-也可以是外连接查询" class="headerlink" title="自连接(自己连接自己)(可以是内连接查询 也可以是外连接查询)"></a>自连接(自己连接自己)(可以是内连接查询 也可以是外连接查询)</h3><ol>
+<li><pre><code class="mysql">select s.StudentName, s2.StudentName from students s join students s2 on s.StudentID = s2.StudentID +1;
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### 联合查询-union,union all</span><br><span class="line"></span><br><span class="line">1. ```mysql</span><br><span class="line">   -- 需要查询的列相同 不同列数不同</span><br><span class="line">   select * from table where 判断条件</span><br><span class="line">   union all -- 这个all不添加会对查询去重</span><br><span class="line">   select * from table where 判断条件2</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+</ol>
+<h3 id="子查询"><a href="#子查询" class="headerlink" title="子查询"></a>子查询</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from table where colunmn1 = (select column1 from table2)</span><br></pre></td></tr></table></figure>
+
+<h2 id="子查询类型"><a href="#子查询类型" class="headerlink" title="子查询类型"></a>子查询类型</h2><table>
+<thead>
+<tr>
+<th>子查询类型</th>
+<th>定义</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1. 标量子查询</td>
+<td>返回单个值</td>
+<td><code>SELECT (SELECT MAX(Salary) FROM Employees);</code></td>
+</tr>
+<tr>
+<td>2. 行子查询</td>
+<td>返回单行数据（多列）</td>
+<td><code>SELECT * FROM Employees WHERE (DeptID, Salary) = (SELECT DeptID, MAX(Salary) FROM Employees GROUP BY DeptID);</code></td>
+</tr>
+<tr>
+<td>3. 列子查询</td>
+<td>返回单列数据（多行）</td>
+<td><code>SELECT * FROM Employees WHERE DeptID IN (SELECT DeptID FROM Departments);</code></td>
+</tr>
+<tr>
+<td>4. 相关子查询</td>
+<td>子查询依赖外部查询的值</td>
+<td><code>SELECT * FROM Employees e WHERE Salary &gt; (SELECT AVG(Salary) FROM Employees WHERE DeptID = e.DeptID);</code></td>
+</tr>
+<tr>
+<td>5. 非相关子查询</td>
+<td>子查询不依赖外部查询的值</td>
+<td><code>SELECT * FROM Employees WHERE DeptID IN (SELECT DeptID FROM Departments WHERE Location = &#39;NY&#39;);</code></td>
+</tr>
+</tbody></table>
+<h2 id="1-比较操作符-Comparison-Operators"><a href="#1-比较操作符-Comparison-Operators" class="headerlink" title="1. 比较操作符 (Comparison Operators)"></a>1. <strong>比较操作符 (Comparison Operators)</strong></h2><table>
+<thead>
+<tr>
+<th>操作符</th>
+<th>说明</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&#x3D;</td>
+<td>检查子查询的结果是否等于外部查询的值</td>
+<td><code>WHERE Salary = (SELECT MAX(Salary) FROM Employees);</code></td>
+</tr>
+<tr>
+<td>!&#x3D; 或 &lt;&gt;</td>
+<td>检查子查询的结果是否不等于外部查询的值</td>
+<td><code>WHERE DeptID &lt;&gt; (SELECT DeptID FROM Departments WHERE Name = &#39;HR&#39;);</code></td>
+</tr>
+<tr>
+<td>&gt;</td>
+<td>检查外部查询的值是否大于子查询的结果</td>
+<td><code>WHERE Salary &gt; (SELECT AVG(Salary) FROM Employees);</code></td>
+</tr>
+<tr>
+<td>&gt;&#x3D;</td>
+<td>检查外部查询的值是否大于或等于子查询的结果</td>
+<td><code>WHERE Salary &gt;= (SELECT MIN(Salary) FROM Employees);</code></td>
+</tr>
+<tr>
+<td>&lt;</td>
+<td>检查外部查询的值是否小于子查询的结果</td>
+<td><code>WHERE Salary &lt; (SELECT MAX(Salary) FROM Employees);</code></td>
+</tr>
+<tr>
+<td>&lt;&#x3D;</td>
+<td>检查外部查询的值是否小于或等于子查询的结果</td>
+<td><code>WHERE Salary &lt;= (SELECT AVG(Salary) FROM Employees);</code></td>
+</tr>
+</tbody></table>
+<h2 id="2-集合操作符-Set-Operators"><a href="#2-集合操作符-Set-Operators" class="headerlink" title="2. 集合操作符 (Set Operators)"></a>2. <strong>集合操作符 (Set Operators)</strong></h2><table>
+<thead>
+<tr>
+<th>操作符</th>
+<th>说明</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>IN</td>
+<td>检查外部查询的值是否存在于子查询返回的集合中</td>
+<td><code>WHERE DeptID IN (SELECT DeptID FROM Departments);</code></td>
+</tr>
+<tr>
+<td>NOT IN</td>
+<td>检查外部查询的值是否不在子查询返回的集合中</td>
+<td><code>WHERE DeptID NOT IN (SELECT DeptID FROM Departments);</code></td>
+</tr>
+<tr>
+<td>ANY</td>
+<td>检查外部查询的值是否与子查询结果集中的任意值匹配</td>
+<td><code>WHERE Salary &gt; ANY (SELECT Salary FROM Employees);</code></td>
+</tr>
+<tr>
+<td>SOME</td>
+<td>与 <code>ANY</code> 相同，检查外部查询的值是否与子查询中的任意值匹配</td>
+<td><code>WHERE Salary &lt; SOME (SELECT Salary FROM Employees);</code></td>
+</tr>
+<tr>
+<td>ALL</td>
+<td>检查外部查询的值是否与子查询结果集中所有值匹配</td>
+<td><code>WHERE Salary &gt; ALL (SELECT Salary FROM Employees WHERE DeptID = 10);</code></td>
+</tr>
+</tbody></table>
+<h2 id="3-存在性操作符-Existence-Operators"><a href="#3-存在性操作符-Existence-Operators" class="headerlink" title="3. 存在性操作符 (Existence Operators)"></a>3. <strong>存在性操作符 (Existence Operators)</strong></h2><table>
+<thead>
+<tr>
+<th>操作符</th>
+<th>说明</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>EXISTS</td>
+<td>检查子查询是否返回至少一行结果</td>
+<td><code>WHERE EXISTS (SELECT 1 FROM Employees WHERE DeptID = 10);</code></td>
+</tr>
+<tr>
+<td>NOT EXISTS</td>
+<td>检查子查询是否没有返回任何结果</td>
+<td><code>WHERE NOT EXISTS (SELECT 1 FROM Employees WHERE DeptID = 10);</code></td>
+</tr>
+</tbody></table>
+<h2 id="4-算术操作符-Arithmetic-Operators"><a href="#4-算术操作符-Arithmetic-Operators" class="headerlink" title="4. 算术操作符 (Arithmetic Operators)"></a>4. <strong>算术操作符 (Arithmetic Operators)</strong></h2><p>这些操作符用于在子查询中对数据进行数学计算。</p>
+<table>
+<thead>
+<tr>
+<th>操作符</th>
+<th>说明</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>+</td>
+<td>相加</td>
+<td><code>SELECT (SELECT Salary + 500 FROM Employees WHERE DeptID = 1);</code></td>
+</tr>
+<tr>
+<td>-</td>
+<td>相减</td>
+<td><code>SELECT (SELECT Salary - 100 FROM Employees WHERE DeptID = 1);</code></td>
+</tr>
+<tr>
+<td>*</td>
+<td>相乘</td>
+<td><code>SELECT (SELECT Salary * 1.1 FROM Employees WHERE DeptID = 1);</code></td>
+</tr>
+<tr>
+<td>&#x2F;</td>
+<td>相除</td>
+<td><code>SELECT (SELECT Salary / 2 FROM Employees WHERE DeptID = 1);</code></td>
+</tr>
+</tbody></table>
+<h2 id="5-逻辑操作符-Logical-Operators"><a href="#5-逻辑操作符-Logical-Operators" class="headerlink" title="5. 逻辑操作符 (Logical Operators)"></a>5. <strong>逻辑操作符 (Logical Operators)</strong></h2><table>
+<thead>
+<tr>
+<th>操作符</th>
+<th>说明</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>AND</td>
+<td>两个条件都成立时为真</td>
+<td><code>SELECT * FROM Employees WHERE DeptID IN (SELECT DeptID FROM Departments WHERE Location = &#39;NY&#39;) AND Salary &gt; 5000;</code></td>
+</tr>
+<tr>
+<td>OR</td>
+<td>任一条件成立时为真</td>
+<td><code>SELECT * FROM Employees WHERE DeptID IN (SELECT DeptID FROM Departments WHERE Location = &#39;NY&#39;) OR Salary &gt; 5000;</code></td>
+</tr>
+<tr>
+<td>NOT</td>
+<td>取反操作，返回不满足条件的结果</td>
+<td><code>SELECT * FROM Employees WHERE Salary NOT IN (SELECT Salary FROM Employees WHERE DeptID = 1);</code></td>
+</tr>
+</tbody></table>
+<h2 id="6-其他操作符-Other-Operators"><a href="#6-其他操作符-Other-Operators" class="headerlink" title="6. 其他操作符 (Other Operators)"></a>6. <strong>其他操作符 (Other Operators)</strong></h2><table>
+<thead>
+<tr>
+<th>操作符</th>
+<th>说明</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>LIKE</td>
+<td>检查字符串是否匹配某个模式</td>
+<td><code>SELECT * FROM Employees WHERE DeptID IN (SELECT DeptID FROM Departments WHERE Name LIKE &#39;Sales%&#39;);</code></td>
+</tr>
+<tr>
+<td>IS NULL</td>
+<td>检查子查询返回的值是否为 <code>NULL</code></td>
+<td><code>SELECT * FROM Employees WHERE DeptID IN (SELECT DeptID FROM Departments WHERE ManagerID IS NULL);</code></td>
+</tr>
+</tbody></table>
+<h2 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h2><table>
+<thead>
+<tr>
+<th>操作</th>
+<th>描述</th>
+<th>示例指令</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>BEGIN</code></td>
+<td>开始一个事务</td>
+<td><code>BEGIN;</code></td>
+</tr>
+<tr>
+<td><code>COMMIT</code></td>
+<td>提交当前事务，将所有操作永久保存</td>
+<td><code>COMMIT;</code></td>
+</tr>
+<tr>
+<td><code>ROLLBACK</code></td>
+<td>回滚当前事务，撤销自上次 <code>BEGIN</code> 以来的操作</td>
+<td><code>ROLLBACK;</code></td>
+</tr>
+<tr>
+<td><code>SAVEPOINT</code></td>
+<td>创建事务中的一个保存点</td>
+<td><code>SAVEPOINT savepoint_name;</code></td>
+</tr>
+<tr>
+<td><code>RELEASE SAVEPOINT</code></td>
+<td>删除创建的保存点</td>
+<td><code>RELEASE SAVEPOINT savepoint_name;</code></td>
+</tr>
+<tr>
+<td><code>ROLLBACK TO SAVEPOINT</code></td>
+<td>回滚到某个保存点</td>
+<td><code>ROLLBACK TO SAVEPOINT savepoint_name;</code></td>
+</tr>
+<tr>
+<td><code>SET TRANSACTION</code></td>
+<td>设置事务的隔离级别</td>
+<td><code>SET TRANSACTION ISOLATION LEVEL READ COMMITTED;</code></td>
+</tr>
+<tr>
+<td><code>LOCK TABLE</code></td>
+<td>锁定表以防止其他事务访问</td>
+<td><code>LOCK TABLE table_name IN EXCLUSIVE MODE;</code></td>
+</tr>
+</tbody></table>
+<ul>
+<li>四大特性<ul>
+<li>原子性</li>
+<li>一致性</li>
+<li>隔离性</li>
+<li>持久性</li>
+</ul>
+</li>
+</ul>
+<h3 id="事务的隔离级别"><a href="#事务的隔离级别" class="headerlink" title="事务的隔离级别"></a>事务的隔离级别</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set [session|golbal] transaction isolation level &#123;READ UNCOMMITTED |READ COMMITTED |REPEATABLE READ | SERIALIZABLE&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="MAY-BE-高级语法"><a href="#MAY-BE-高级语法" class="headerlink" title="MAY_BE 高级语法"></a>MAY_BE 高级语法</h2><ul>
 <li><p>动态sql语句</p>
  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//定义哪个类使用这个动态sql</span></span><br><span class="line">&lt;mapper namespace=<span class="string">&quot;com.example.mapper.UserMapper&quot;</span>&gt;</span><br><span class="line"><span class="comment">//select id是类中使用这个动态sql的函数名</span></span><br><span class="line">&lt;select id=<span class="string">&quot;findUser&quot;</span> </span><br><span class="line"><span class="comment">//resultType 这个是定义函数总所用到的类(user类啊等等)就是我需要调用哪个用户类中的变量传到数据库中</span></span><br><span class="line"></span><br><span class="line">resultType=<span class="string">&quot;com.example.User&quot;</span>&gt;</span><br><span class="line">SELECT * FROM users</span><br><span class="line">&lt;where&gt;</span><br><span class="line">   &lt;<span class="keyword">if</span> test=<span class="string">&quot;id != null&quot;</span>&gt;</span><br><span class="line">   id = #&#123;id&#125;</span><br><span class="line">   &lt;/<span class="keyword">if</span>&gt;</span><br><span class="line">   &lt;<span class="keyword">if</span> test=<span class="string">&quot;name != null and name.trim() != &#x27;&#x27;&quot;</span>&gt;</span><br><span class="line">   <span class="type">AND</span> <span class="variable">name</span> <span class="operator">=</span> #&#123;name&#125;</span><br><span class="line">   &lt;/<span class="keyword">if</span>&gt;</span><br><span class="line">   &lt;<span class="keyword">if</span> test=<span class="string">&quot;email != null and email.trim() != &#x27;&#x27;&quot;</span>&gt;</span><br><span class="line">   <span class="type">AND</span> <span class="variable">email</span> <span class="operator">=</span> #&#123;email&#125;</span><br><span class="line">   &lt;/<span class="keyword">if</span>&gt;</span><br><span class="line">&lt;/where&gt;</span><br><span class="line">&lt;/select&gt;</span><br><span class="line">&lt;/mapper&gt;</span><br></pre></td></tr></table></figure>
 </li>
@@ -548,6 +1119,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">简单写点</a>
+              </li>
             
             <div class="clearfix"></div>
           </ul>
